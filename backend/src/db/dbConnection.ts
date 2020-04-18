@@ -35,7 +35,7 @@ const createUserTable = (): void => {
 /**
  * Drop User Table
  */
-const dropUserTable = () => {
+const dropUserTable = (): void => {
     const usersDropQuery = 'DROP TABLE IF EXISTS users';
     pool.query(usersDropQuery)
         .then((res) => {
@@ -51,20 +51,20 @@ const dropUserTable = () => {
 /**
  * Create All Tables
  */
-const createAllTables = () => {
+const createAllTables = (): void => {
     createUserTable();
 };
 
 /**
  * Drop All Tables
  */
-const dropAllTables = () => {
+const dropAllTables = (): void => {
     dropUserTable();
 };
 
 pool.on('remove', () => {
     console.log(chalk.yellow('> Client removed.'));
-    process.exit(0);
+    // process.exit(0);
 });
 
 export {
