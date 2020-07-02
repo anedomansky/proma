@@ -17,11 +17,6 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "@typescript-eslint/interface-name-prefix": [
-            1,
-            {
-                "prefixWithI": "always"
-            }
-        ]
+        
     }
 }

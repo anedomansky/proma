@@ -23,7 +23,7 @@ const createUserTable = (): void => {
 
     pool.query(userCreateQuery)
         .then((res) => {
-            console.log(chalk.green('> Created the table.', res));
+            console.log(chalk.green('> Created the table.', res.command));
             pool.end();
         })
         .catch((error) => {
@@ -39,7 +39,7 @@ const dropUserTable = (): void => {
     const usersDropQuery = 'DROP TABLE IF EXISTS users';
     pool.query(usersDropQuery)
         .then((res) => {
-            console.log(chalk.green('> Dropped the table.', res));
+            console.log(chalk.green('> Dropped the table.', res.command));
             pool.end();
         })
         .catch((error) => {
@@ -51,14 +51,14 @@ const dropUserTable = (): void => {
 /**
  * Create All Tables
  */
-const createAllTables = (): void => {
+export const createAllTables = (): void => {
     createUserTable();
 };
 
 /**
  * Drop All Tables
  */
-const dropAllTables = (): void => {
+export const dropAllTables = (): void => {
     dropUserTable();
 };
 
@@ -66,8 +66,3 @@ pool.on('remove', () => {
     console.log(chalk.yellow('> Client removed.'));
     // process.exit(0);
 });
-
-export {
-    createAllTables,
-    dropAllTables,
-};
