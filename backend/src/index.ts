@@ -9,8 +9,8 @@ dotenv.config();
 
 const PORT = process.env.PORT || 4001;
 
-dropAllTables();
-// createAllTables();
+// dropAllTables();
+createAllTables();
 
 const app = express();
 app.use(cors());
