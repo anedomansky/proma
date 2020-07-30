@@ -1,15 +1,9 @@
 import pool from './pool';
 
 export default {
-    /**
-     * DB Query
-     * @param {object} req
-     * @param {object} res
-     * @returns {object} object
-     */
-    query(queryText: string, params: any): Promise<object> {
+    query(queryText: string, values?: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            pool.query(queryText, params)
+            pool.query(queryText, values)
                 .then((res) => {
                     resolve(res);
                 })
