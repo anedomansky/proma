@@ -37,21 +37,9 @@ const createProjectTable = async (): Promise<void> => {
     try {
         const createQuery = `CREATE TABLE IF NOT EXISTS project
             (id SERIAL PRIMARY KEY, 
-            name VARCHAR(50) NOT NULL)`;
-        const result = await pool.query(createQuery);
-        console.log(chalk.green(result.command, '\n> Created the project table.'));
-    } catch (error) {
-        console.trace(chalk.red('> Could not create the table: ', error));
-    }
-};
-
-const createStatusTable = async (): Promise<void> => {
-    try {
-        const createQuery = `CREATE TABLE IF NOT EXISTS status
-            (id SERIAL PRIMARY KEY, 
             name VARCHAR(50) UNIQUE NOT NULL)`;
         const result = await pool.query(createQuery);
-        console.log(chalk.green(result.command, '\n> Created the status table.'));
+        console.log(chalk.green(result.command, '\n> Created the project table.'));
     } catch (error) {
         console.trace(chalk.red('> Could not create the table: ', error));
     }
@@ -63,7 +51,7 @@ const createTaskTable = async (): Promise<void> => {
             (id SERIAL PRIMARY KEY, 
             name VARCHAR(100) NOT NULL,
             description VARCHAR(255),
-            status_id INTEGER REFERENCES status(id) ON DELETE CASCADE)`;
+            status VARCHAR(50) NOT NULL`;
         const result = await pool.query(createQuery);
         console.log(chalk.green(result.command, '\n> Created the task table.'));
     } catch (error) {
@@ -141,16 +129,6 @@ const dropProjectTable = async (): Promise<void> => {
     }
 };
 
-const dropStatusTable = async (): Promise<void> => {
-    try {
-        const dropQuery = 'DROP TABLE IF EXISTS status';
-        const result = await pool.query(dropQuery);
-        console.log(chalk.green(result.command, '\n> Dropped the status table.'));
-    } catch (error) {
-        console.trace(chalk.red('> Could not drop the table: ', error));
-    }
-};
-
 const dropTaskTable = async (): Promise<void> => {
     try {
         const dropQuery = 'DROP TABLE IF EXISTS task';
@@ -195,7 +173,6 @@ export const createAllTables = async (): Promise<void> => {
     await createPromaUserTable();
     await createRoleTable();
     await createProjectTable();
-    await createStatusTable();
     await createTaskTable();
     await createUserTaskTable();
     await createProjectTaskTable();
@@ -206,7 +183,6 @@ export const dropAllTables = async (): Promise<void> => {
     await dropPromaUserTable();
     await dropRoleTable();
     await dropProjectTable();
-    await dropStatusTable();
     await dropTaskTable();
     await dropUserProjectTable();
     await dropUserTaskTable();

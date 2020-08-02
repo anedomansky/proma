@@ -2,11 +2,11 @@ import express from 'express';
 import chalk from 'chalk';
 import dbQuery from '../db/dbQuery';
 
-export const userRoutes = express.Router();
+export const userController = express.Router();
 
 // TODO: better status codes
 
-userRoutes.route('/all').get(async (req, res) => {
+userController.route('/all').get(async (req, res) => {
     const query = `SELECT first_name, last_name, email, created_on FROM proma_user`;
     try {
         const { rows } = await dbQuery.query(query);
@@ -21,7 +21,7 @@ userRoutes.route('/all').get(async (req, res) => {
     }
 });
 
-userRoutes.route('/getByEmail').get(async (req, res) => {
+userController.route('/getByEmail').get(async (req, res) => {
     const { email } = req.params;
     const query = `SELECT first_name, last_name, email, password, created_on FROM proma_user WHERE email = "${email}"`;
     try {
@@ -37,7 +37,7 @@ userRoutes.route('/getByEmail').get(async (req, res) => {
     }
 });
 
-userRoutes.route('/add').post(async (req, res) => {
+userController.route('/add').post(async (req, res) => {
     const { email, first_name, last_name, password } = req.body;
     // TODO: hash the password before saving it into the database
     const hashedPassword = password;
@@ -53,7 +53,7 @@ userRoutes.route('/add').post(async (req, res) => {
     }
 });
 
-userRoutes.route('/login').post(async (req, res) => {
+userController.route('/login').post(async (req, res) => {
     const { email, password } = req.body;
     // TODO: implement me, check password - and send yeah or nay
 });
