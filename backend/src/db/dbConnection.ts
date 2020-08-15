@@ -64,7 +64,7 @@ const createTaskTable = async (): Promise<void> => {
             (id SERIAL PRIMARY KEY, 
             name VARCHAR(100) NOT NULL,
             description VARCHAR(255),
-            status_id INTEGER REFERENCES status(id) ON DELETE CASCADE`;
+            status_id INTEGER NOT NULL  REFERENCES status(id) ON DELETE CASCADE)`;
         const result = await pool.query(createQuery);
         console.log(chalk.green(result.command, '\n> Created the task table.'));
     } catch (error) {
@@ -76,8 +76,8 @@ const createUserTaskTable = async (): Promise<void> => {
     try {
         const createQuery = `CREATE TABLE IF NOT EXISTS user_task
             (id SERIAL PRIMARY KEY, 
-            proma_user_id INTEGER REFERENCES proma_user(id) ON DELETE CASCADE,
-            task_id INTEGER REFERENCES task(id) ON DELETE CASCADE)`;
+            proma_user_id INTEGER NOT NULL REFERENCES proma_user(id) ON DELETE CASCADE,
+            task_id INTEGER NOT NULL REFERENCES task(id) ON DELETE CASCADE)`;
         const result = await pool.query(createQuery);
         console.log(chalk.green(result.command, '\n> Created the user_task table.'));
     } catch (error) {
@@ -89,8 +89,8 @@ const createProjectTaskTable = async (): Promise<void> => {
     try {
         const createQuery = `CREATE TABLE IF NOT EXISTS project_task
             (id SERIAL PRIMARY KEY, 
-            task_id INTEGER REFERENCES task(id) ON DELETE CASCADE,
-            project_id INTEGER REFERENCES project(id) ON DELETE CASCADE)`;
+            task_id INTEGER NOT NULL REFERENCES task(id) ON DELETE CASCADE,
+            project_id INTEGER NOT NULL REFERENCES project(id) ON DELETE CASCADE)`;
         const result = await pool.query(createQuery);
         console.log(chalk.green(result.command, '\n> Created the project_task table.'));
     } catch (error) {
@@ -102,9 +102,9 @@ const createUserProjectTable = async (): Promise<void> => {
     try {
         const createQuery = `CREATE TABLE IF NOT EXISTS user_project
             (id SERIAL PRIMARY KEY, 
-            proma_user_id INTEGER REFERENCES proma_user(id) ON DELETE CASCADE,
-            project_id INTEGER REFERENCES project(id) ON DELETE CASCADE,
-            role_id INTEGER REFERENCES role(id) ON DELETE CASCADE)`;
+            proma_user_id INTEGER NOT NULL REFERENCES proma_user(id) ON DELETE CASCADE,
+            project_id INTEGER NOT NULL REFERENCES project(id) ON DELETE CASCADE,
+            role_id INTEGER NOT NULL REFERENCES role(id) ON DELETE CASCADE)`;
         const result = await pool.query(createQuery);
         console.log(chalk.green(result.command, '\n> Created the user_project table.'));
     } catch (error) {
@@ -204,14 +204,14 @@ export const createAllTables = async (): Promise<void> => {
 };
 
 export const dropAllTables = async (): Promise<void> => {
-    await dropPromaUserTable();
-    await dropRoleTable();
-    await dropProjectTable();
-    await dropStatusTable();
-    await dropTaskTable();
     await dropUserProjectTable();
     await dropUserTaskTable();
     await dropProjectTaskTable();
+    await dropPromaUserTable();
+    await dropRoleTable();
+    await dropProjectTable();
+    await dropTaskTable();
+    await dropStatusTable();
 };
 
 pool.on('remove', () => {

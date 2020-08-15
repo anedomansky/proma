@@ -41,7 +41,7 @@ userController.route('/add').post(async (req, res) => {
     const { email, first_name, last_name, password } = req.body;
     // TODO: hash the password before saving it into the database
     const hashedPassword = password;
-    const query = `INSERT INTO proma_user(id, first_name, last_name, email, password, created_on) VALUES(NULL, ?, ?, ?, ?, NULL)`;
+    const query = `INSERT INTO proma_user(id, first_name, last_name, email, password, created_on) VALUES(NULL, ?, ?, ?, ?, DEFAULT)`;
     const values = [email, first_name, last_name, hashedPassword];
     try {
         const { rows } = await dbQuery.query(query, values);
