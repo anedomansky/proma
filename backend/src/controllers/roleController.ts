@@ -21,7 +21,7 @@ roleController.route('/all').get(async (req, res) => {
 
 roleController.route('/add').post(async (req, res) => {
     const { name } = req.body;
-    const query = `INSERT INTO role(id, name) VALUES(NULL, ?)`;
+    const query = `INSERT INTO role(name) VALUES($1) returning *`;
     const values = [name];
     try {
         const { rows } = await dbQuery.query(query, values);

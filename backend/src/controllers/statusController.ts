@@ -21,7 +21,7 @@ statusController.route('/all').get(async (req, res) => {
 
 statusController.route('/add').post(async (req, res) => {
     const { name } = req.body;
-    const query = `INSERT INTO status(id, name) VALUES(NULL, ?)`;
+    const query = `INSERT INTO status(name) VALUES($1) returning *`;
     const values = [name];
     try {
         const { rows } = await dbQuery.query(query, values);

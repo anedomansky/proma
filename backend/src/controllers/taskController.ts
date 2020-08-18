@@ -21,7 +21,7 @@ taskController.route('/all').get(async (req, res) => {
 
 taskController.route('/add').post(async (req, res) => {
     const { name, description, status } = req.body;
-    const query = `INSERT INTO task(id, name, description, status_id) VALUES(NULL, ?, ?, (SELECT id from status WHERE name='${status}'))`;
+    const query = `INSERT INTO task(name, description, status_id) VALUES($1, $2, (SELECT id from status WHERE name='${status}')) returning *`;
     const values = [name, description];
     try {
         const { rows } = await dbQuery.query(query, values);

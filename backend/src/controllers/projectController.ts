@@ -21,7 +21,7 @@ projectController.route('/all').get(async (req, res) => {
 
 projectController.route('/add').post(async (req, res) => {
     const { name } = req.body;
-    const query = `INSERT INTO project(id, name) VALUES(NULL, ?)`;
+    const query = `INSERT INTO project(name) VALUES($1) returning *`;
     const values = [name];
     try {
         const { rows } = await dbQuery.query(query, values);
