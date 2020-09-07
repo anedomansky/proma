@@ -10,6 +10,8 @@ import { projectController } from './controllers/projectController';
 import { taskController } from './controllers/taskController';
 import { statusController } from './controllers/statusController';
 import { projectTaskController } from './controllers/projectTaskController';
+import { userTaskController } from './controllers/userTaskController';
+import { userProjectController } from './controllers/userProjectController';
 
 dotenv.config();
 
@@ -28,6 +30,8 @@ app.use('/projects', projectController);
 app.use('/tasks', taskController);
 app.use('/status', statusController);
 app.use('/projectTasks', projectTaskController);
+app.use('/userTasks', userTaskController);
+app.use('/userProjects', userProjectController);
 
 app.listen(PORT, () => {
     console.log(chalk.blue(`> Server is running on http://localhost:${PORT}`));
