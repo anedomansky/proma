@@ -1,0 +1,19 @@
+* {
+    font-family: Lato, Arial, sans-serif;
+    font-weight: bold;
+    box-sizing: border-box; // Include padding and border in the element's total width and height
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    line-height: calc(1ex / 0.32);
+    font-size: 1.25rem;
+
+    h1 {
+        font-size: 2rem;
+    }
+}
