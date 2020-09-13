@@ -1,3 +1,5 @@
+@import '../../utilities/variables';
+
 .content {
     height: 100vh;
     display: grid;
@@ -9,6 +11,7 @@
 
     main {
         grid-area: content;
-        background-color: red;
+        color: $accent1;
+        display: grid;
     }
 }

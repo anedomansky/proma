@@ -1,4 +1,53 @@
+@import '../../utilities/variables';
+
 header {
     grid-area: header;
-    background-color: blue;
+    background-color: $primary1;
+    color: $primary3;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    align-items: center;
+
+    .logo {
+        width: 6rem;
+        height: auto;
+    }
+
+    .title {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .user-menu {
+        width: 4rem;
+        height: auto;
+        justify-self: end;
+    }
+}
+
+
+@media (min-width: 375px) {
+    header {
+        grid-area: header;
+        background-color: $primary1;
+        color: $primary3;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(auto, 1fr));
+        align-items: center;
+    
+        .logo {
+            width: 10rem;
+            height: auto;
+        }
+    
+        .title {
+            margin: 0;
+        }
+    
+        .user-menu {
+            width: 5rem;
+            height: auto;
+            justify-self: end;
+        }
+    }
 }
