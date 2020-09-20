@@ -58,6 +58,16 @@
         "react/prop-types": 0,
         "react/jsx-indent-props": 0,
         "react/no-array-index-key": 0,
-        "react/button-has-type": 0
+        "react/button-has-type": 0,
+        "jsx-a11y/label-has-associated-control": [
+            "error",
+            {
+                "labelComponents": [],
+                "labelAttributes": [],
+                "controlComponents": [],
+                "assert": "htmlFor",
+                "depth": 25
+            }
+        ]
     }
 }

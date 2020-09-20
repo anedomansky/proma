@@ -1,6 +1,8 @@
+@import './utilities/variables';
+
+
 * {
     font-family: Lato, Arial, sans-serif;
-    font-weight: bold;
     box-sizing: border-box; // Include padding and border in the element's total width and height
 }
 
@@ -15,5 +17,14 @@ body {
 
     h1 {
         font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+        font-weight: normal;
+    }
+
+    input {
+        outline-color: $primary3;
     }
 }

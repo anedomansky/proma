@@ -13,6 +13,9 @@
         grid-area: content;
         color: $accent1;
         display: grid;
-        border: 1rem solid $primary1;
+        overflow: auto;
+        border-bottom: 0.5rem solid $primary1;
+        border-left: 0.5rem solid $primary1;
+        border-right: 0.5rem solid $primary1;
     }
 }
