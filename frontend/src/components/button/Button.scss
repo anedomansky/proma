@@ -1,0 +1,16 @@
+@import '../../utilities/variables';
+
+button {
+    cursor: pointer;
+    border-radius: 0.75rem;
+    border: 1px solid $accent1;
+    background-color: $primary2;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    font-size: 1.5rem;
+
+    &:hover {
+        border: 1px solid $accent3;
+        color: $primary2;
+        background-color: $accent3;
+    }
+}

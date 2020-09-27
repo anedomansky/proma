@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../button/Button';
 import Input from '../input/Input';
 import './Login.scss';
 
@@ -25,7 +27,10 @@ const Login: React.FC = () => (
                 />
             </div>
             <div className="form-row">
-                <button type="submit" tabIndex={0}>Sign In</button>
+                <div className="submit">
+                    <Button type="submit" text="Sign In" ariaLabel="Sign in" onClick={() => null} />
+                    <Link to="/register" className="register">Not a user yet?</Link>
+                </div>
             </div>
         </form>
     </section>
