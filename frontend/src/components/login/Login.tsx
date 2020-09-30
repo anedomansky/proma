@@ -24,11 +24,15 @@ const Login: React.FC = () => (
                     type="password"
                     pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$"
                     title="Length: 8 - 20. Use at least one lowercase character, one uppercase character and one number."
+                    minLength={8}
+                    maxLength={20}
                 />
             </div>
             <div className="form-row">
                 <div className="submit">
-                    <Button type="submit" text="Sign In" ariaLabel="Sign in" onClick={() => null} />
+                    <Button type="submit" ariaLabel="Sign in" onClick={() => null}>
+                        <span>Sign In</span>
+                    </Button>
                     <Link to="/register" className="register">Not a user yet?</Link>
                 </div>
             </div>

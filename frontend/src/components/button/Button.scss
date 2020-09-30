@@ -2,6 +2,10 @@
 
 button {
     cursor: pointer;
+    
+}
+
+.submit-btn {
     border-radius: 0.75rem;
     border: 1px solid $accent1;
     background-color: $primary2;
@@ -13,4 +17,9 @@ button {
         color: $primary2;
         background-color: $accent3;
     }
+}
+
+.button-btn {
+    border: none;
+    background: none;
 }

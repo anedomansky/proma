@@ -18,10 +18,15 @@ header {
         font-size: 1.5rem;
     }
 
-    .user-menu {
-        width: 4rem;
-        height: auto;
-        justify-self: end;
+    div {
+        display: flex;
+        justify-content: flex-end;
+
+        .user-menu {
+            width: 4rem;
+            height: auto;
+            justify-self: end;
+        }
     }
 }
 
@@ -43,8 +48,8 @@ header {
         .title {
             margin: 0;
         }
-    
-        .user-menu {
+
+        div .user-menu {
             width: 5rem;
             height: auto;
             justify-self: end;

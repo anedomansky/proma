@@ -7,12 +7,14 @@ interface Props {
     type: string;
     pattern: string;
     title?: string;
+    minLength?: number;
+    maxLength?: number;
 }
 
-const Input: React.FC<Props> = ({ label, id, type, pattern, title }) => (
+const Input: React.FC<Props> = ({ label, id, type, pattern, title, minLength, maxLength }) => (
     <>
         <label htmlFor={id}>{label}</label>
-        <input id={id} type={type} pattern={pattern} title={title} />
+        <input id={id} type={type} pattern={pattern} title={title} minLength={minLength} maxLength={maxLength} />
     </>
 );
 
