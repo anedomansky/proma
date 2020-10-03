@@ -19,7 +19,7 @@
         grid-row-gap: 1rem;
         margin-bottom: 2rem;
 
-        label, input, .submit {
+        label, input, .submit, p {
             grid-row-start: 2;
             grid-row-end: 2;
             grid-column-start: 2;
@@ -29,6 +29,14 @@
         label {
             grid-row-start: 1;
             grid-row-end: 1;
+        }
+
+        p {
+            grid-row-start: 1;
+            grid-row-end: 1;
+            color: $accent2;
+            font-size: 1.5rem;
+            text-align: center;
         }
 
         .submit {
