@@ -13,7 +13,8 @@ const createPromaUserTable = async (): Promise<void> => {
             last_name VARCHAR(100), 
             email VARCHAR(100) UNIQUE NOT NULL, 
             password VARCHAR(100) NOT NULL,
-            created_on DATE NOT NULL DEFAULT CURRENT_DATE)`;
+            created_on DATE NOT NULL DEFAULT CURRENT_DATE,
+            is_admin BOOLEAN NOT NULL)`;
         const result = await pool.query(createQuery);
         console.log(chalk.green(result.command, '\n> Created the proma_user table.'));
     } catch (error) {

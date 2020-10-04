@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 export const userController = express.Router();
 
 userController.route('/all').get(async (req, res) => {
-    const query = `SELECT first_name, last_name, email, created_on FROM proma_user`;
+    const query = `SELECT first_name as firstName, last_name as lastName, email, created_on as createdOn, is_admin as isAdmin FROM proma_user`;
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse = rows;
@@ -22,7 +22,7 @@ userController.route('/all').get(async (req, res) => {
 
 userController.route('/getByEmail/:email').get(async (req, res) => {
     const { email } = req.params;
-    const query = `SELECT first_name, last_name, email, created_on FROM proma_user WHERE email = '${email}'`;
+    const query = `SELECT first_name as firstName, last_name as lastName, email, created_on as createdOn, is_admin as isAdmin FROM proma_user WHERE email = '${email}'`;
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse = rows;
@@ -37,12 +37,12 @@ userController.route('/getByEmail/:email').get(async (req, res) => {
 });
 
 userController.route('/add').post(async (req, res) => {
-    const { email, first_name, last_name, password } = req.body;
+    const { email, firstName, lastName, password, isAdmin } = req.body;
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    const query = `INSERT INTO proma_user(first_name, last_name, email, password, created_on) VALUES($1, $2, $3, $4, DEFAULT) returning *`;
-    const values = [first_name, last_name, email, hashedPassword];
+    const query = `INSERT INTO proma_user(first_name, last_name, email, password, created_on, is_admin) VALUES($1, $2, $3, $4, DEFAULT, $5) returning *`;
+    const values = [firstName, lastName, email, hashedPassword, isAdmin];
     try {
         const { rows } = await dbQuery.query(query, values);
         const dbResponse = rows[0];
