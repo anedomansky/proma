@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import UserService from '../../services/UserService';
 import Button from '../button/Button';
 import Input from '../input/Input';
 import './Registration.scss';
@@ -10,8 +11,13 @@ const Registration: React.FC = () => {
     const [password, setPassword] = useState<string>('');
     const [repeatedPassword, setRepeatedPassword] = useState<string>('');
 
-    const register = () => {
+    const register = async () => {
         console.log('Registration!');
+        try {
+            const registeredUser = await UserService.register(firstName, lastName, email, password);
+        } catch (error) {
+            
+        }
     };
 
     return (
