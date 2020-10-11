@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Button from '../button/Button';
 import Input from '../input/Input';
 import './Login.scss';
 
+interface Params {
+    registered?: string;
+}
+
 const Login: React.FC = () => {
+    const { registered } = useParams<Params>();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -16,6 +21,7 @@ const Login: React.FC = () => {
         <section className="login">
             <h2>Sign In</h2>
             <hr />
+            <h3>{`Registration ${registered}! Please proceed with the login now.`}</h3>
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="form-row">
                     <Input

@@ -12,6 +12,11 @@
         box-shadow: 0 2px 4px $accent1Light;
     }
 
+    h3 {
+        text-align: center;
+        color: $accent3;
+    }
+
     .form-row {
         display: grid;
         grid-template-columns: 1fr 2fr 1fr;

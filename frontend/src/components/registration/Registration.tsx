@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import UserService from '../../services/UserService';
 import Button from '../button/Button';
 import Input from '../input/Input';
 import './Registration.scss';
 
 const Registration: React.FC = () => {
+    const history = useHistory();
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -14,9 +16,11 @@ const Registration: React.FC = () => {
     const register = async () => {
         console.log('Registration!');
         try {
-            const registeredUser = await UserService.register(firstName, lastName, email, password);
+            console.log(firstName, lastName, email, password);
+            await UserService.register(firstName, lastName, email, password);
+            history.push('/login/successful');
         } catch (error) {
-            
+            console.error(error);
         }
     };
 
@@ -30,7 +34,7 @@ const Registration: React.FC = () => {
                         label="First Name"
                         id="firstname"
                         type="text"
-                        pattern="[A-Za-z ]{2,32}"
+                        pattern="[0-9A-Za-z ]{2,32}"
                         minLength={2}
                         maxLength={32}
                         title="Length: 2 - 32 characters."
@@ -43,7 +47,7 @@ const Registration: React.FC = () => {
                         label="Last Name"
                         id="lastname"
                         type="text"
-                        pattern="[A-Za-z ]{2,32}"
+                        pattern="[0-9A-Za-z ]{2,32}"
                         minLength={2}
                         maxLength={32}
                         title="Length: 2 - 32 characters."

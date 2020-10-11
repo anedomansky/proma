@@ -33,12 +33,16 @@ class UserService {
     }
 
     public static async register(firstName: string, lastName: string, email: string, password: string): Promise<User> {
-        const checkIfUsersExist = await fetch('http://localhost:4001/users/all');
         let isAdmin = false;
+        const checkIfUsersExist = await fetch('http://localhost:4001/users/all');
         if (checkIfUsersExist.status === 404) {
             isAdmin = true;
         }
         const response = await fetch('http://localhost:4001/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 firstName,
                 lastName,
@@ -58,6 +62,10 @@ class UserService {
 
     public static async login(email: string, password: string): Promise<string> {
         const response = await fetch('http://localhost:4001/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 email,
                 password,
@@ -77,7 +85,7 @@ class UserService {
             throw new Error(error.message);
         }
         const success: LoginResponse = await response.json();
-        return success.message; // TODO: save the received JWT token in storage
+        return success.message; // TODO: save the received JWT token in storage; send it with every request
     }
 }
 

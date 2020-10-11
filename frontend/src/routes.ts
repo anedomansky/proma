@@ -12,7 +12,7 @@ const routes: RouteConfig[] = [
     {
         component: LoginPage,
         exact: true,
-        path: '/login',
+        path: '/login/:registered',
     },
     {
         component: RegistrationPage,

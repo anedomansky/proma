@@ -38,6 +38,7 @@ userController.route('/getByEmail/:email').get(async (req, res) => {
 });
 
 userController.route('/register').post(async (req, res) => {
+    console.log(chalk.bgCyanBright(req.body.email));
     const { email, firstName, lastName, password, isAdmin } = req.body;
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
