@@ -2,10 +2,10 @@ import express from 'express';
 import chalk from 'chalk';
 import dbQuery from '../db/dbQuery';
 
-export const taskController = express.Router();
+const taskController = express.Router();
 
 taskController.route('/all').get(async (req, res) => {
-    const query = `SELECT t.id as id, t.name as name, t.description as description, s.name as status FROM task as t INNER JOIN status as s ON s.id=t.status_id`;
+    const query = 'SELECT t.id as id, t.name as name, t.description as description, s.name as status FROM task as t INNER JOIN status as s ON s.id=t.status_id';
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse = rows;
@@ -32,3 +32,5 @@ taskController.route('/add').post(async (req, res) => {
         return res.status(500).send(error);
     }
 });
+
+export default taskController;

@@ -2,6 +2,7 @@ import { ErrorResponse } from '../interfaces/ErrorResponse';
 import { LoginRequest } from '../interfaces/LoginRequest';
 import { LoginResponse } from '../interfaces/LoginResponse';
 import { User } from '../interfaces/User';
+import { UserResponse } from '../interfaces/UserResponse';
 
 class UserService {
     public static async getAll(): Promise<User[]> {
@@ -18,7 +19,7 @@ class UserService {
         return users;
     }
 
-    public static async getByEmail(email: string): Promise<User | null> {
+    public static async getByEmail(email: string): Promise<UserResponse | null> {
         const response = await fetch(`http://localhost:4001/users/getByEmail/${email}`);
         const { status } = response;
         if (status === 404) {
@@ -28,11 +29,11 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const user: User = await response.json();
+        const user: UserResponse = await response.json();
         return user;
     }
 
-    public static async register(firstName: string, lastName: string, email: string, password: string): Promise<User> {
+    public static async register(firstName: string, lastName: string, email: string, password: string): Promise<UserResponse> {
         let isAdmin = false;
         const checkIfUsersExist = await fetch('http://localhost:4001/users/all');
         if (checkIfUsersExist.status === 404) {
@@ -56,7 +57,7 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const newUser: User = await response.json();
+        const newUser: UserResponse = await response.json();
         return newUser;
     }
 
@@ -84,8 +85,8 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const success: LoginResponse = await response.json();
-        return success.message; // TODO: save the received JWT token in storage; send it with every request
+        const success: LoginResponse = await response.json(); // TODO: save the received JWT token in storage; send it with every request
+        return success.message;
     }
 }
 

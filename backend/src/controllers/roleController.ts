@@ -2,10 +2,10 @@ import express from 'express';
 import chalk from 'chalk';
 import dbQuery from '../db/dbQuery';
 
-export const roleController = express.Router();
+const roleController = express.Router();
 
 roleController.route('/all').get(async (req, res) => {
-    const query = `SELECT * FROM role`;
+    const query = 'SELECT * FROM role';
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse = rows;
@@ -21,7 +21,7 @@ roleController.route('/all').get(async (req, res) => {
 
 roleController.route('/add').post(async (req, res) => {
     const { name } = req.body;
-    const query = `INSERT INTO role(name) VALUES($1) returning *`;
+    const query = 'INSERT INTO role(name) VALUES($1) returning *';
     const values = [name];
     try {
         const { rows } = await dbQuery.query(query, values);
@@ -32,3 +32,5 @@ roleController.route('/add').post(async (req, res) => {
         return res.status(500).send(error);
     }
 });
+
+export default roleController;

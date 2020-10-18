@@ -58,7 +58,6 @@ const createStatusTable = async (): Promise<void> => {
     }
 };
 
-
 const createTaskTable = async (): Promise<void> => {
     try {
         const createQuery = `CREATE TABLE IF NOT EXISTS task

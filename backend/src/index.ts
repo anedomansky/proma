@@ -3,18 +3,18 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import chalk from 'chalk';
 import { createAllTables, dropAllTables } from './db/dbConnection';
-import { userController } from './controllers/userController';
-import { roleController } from './controllers/roleController';
-import { projectController } from './controllers/projectController';
-import { taskController } from './controllers/taskController';
-import { statusController } from './controllers/statusController';
-import { projectTaskController } from './controllers/projectTaskController';
-import { userTaskController } from './controllers/userTaskController';
-import { userProjectController } from './controllers/userProjectController';
+import userController from './controllers/userController';
+import roleController from './controllers/roleController';
+import projectController from './controllers/projectController';
+import taskController from './controllers/taskController';
+import statusController from './controllers/statusController';
+import projectTaskController from './controllers/projectTaskController';
+import userTaskController from './controllers/userTaskController';
+import userProjectController from './controllers/userProjectController';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 4001;
+const { PORT } = process.env;
 
 // dropAllTables();
 createAllTables();

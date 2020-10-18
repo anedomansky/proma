@@ -2,10 +2,10 @@ import express from 'express';
 import chalk from 'chalk';
 import dbQuery from '../db/dbQuery';
 
-export const statusController = express.Router();
+const statusController = express.Router();
 
 statusController.route('/all').get(async (req, res) => {
-    const query = `SELECT * FROM status`;
+    const query = 'SELECT * FROM status';
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse = rows;
@@ -21,7 +21,7 @@ statusController.route('/all').get(async (req, res) => {
 
 statusController.route('/add').post(async (req, res) => {
     const { name } = req.body;
-    const query = `INSERT INTO status(name) VALUES($1) returning *`;
+    const query = 'INSERT INTO status(name) VALUES($1) returning *';
     const values = [name];
     try {
         const { rows } = await dbQuery.query(query, values);
@@ -32,3 +32,5 @@ statusController.route('/add').post(async (req, res) => {
         return res.status(500).send(error);
     }
 });
+
+export default statusController;

@@ -2,10 +2,10 @@ import express from 'express';
 import chalk from 'chalk';
 import dbQuery from '../db/dbQuery';
 
-export const projectController = express.Router();
+const projectController = express.Router();
 
 projectController.route('/all').get(async (req, res) => {
-    const query = `SELECT * FROM project`;
+    const query = 'SELECT * FROM project';
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse = rows;
@@ -21,7 +21,7 @@ projectController.route('/all').get(async (req, res) => {
 
 projectController.route('/add').post(async (req, res) => {
     const { name } = req.body;
-    const query = `INSERT INTO project(name) VALUES($1) returning *`;
+    const query = 'INSERT INTO project(name) VALUES($1) returning *';
     const values = [name];
     try {
         const { rows } = await dbQuery.query(query, values);
@@ -32,3 +32,5 @@ projectController.route('/add').post(async (req, res) => {
         return res.status(500).send(error);
     }
 });
+
+export default projectController;

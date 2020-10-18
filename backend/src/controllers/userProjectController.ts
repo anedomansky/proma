@@ -2,10 +2,10 @@ import express from 'express';
 import chalk from 'chalk';
 import dbQuery from '../db/dbQuery';
 
-export const userProjectController = express.Router();
+const userProjectController = express.Router();
 
 userProjectController.route('/all').get(async (req, res) => {
-    const query = `SELECT userproject.id as id, prouser.first_name as first_name, prouser.last_name as last_name, prouser.email as email, p.name as project, r.name as role FROM user_project as userproject INNER JOIN proma_user as prouser ON prouser.id=userproject.proma_user_id INNER JOIN project as p ON p.id=userproject.project_id INNER JOIN role as r ON r.id=userproject.role_id`;
+    const query = 'SELECT userproject.id as id, prouser.first_name as first_name, prouser.last_name as last_name, prouser.email as email, p.name as project, r.name as role FROM user_project as userproject INNER JOIN proma_user as prouser ON prouser.id=userproject.proma_user_id INNER JOIN project as p ON p.id=userproject.project_id INNER JOIN role as r ON r.id=userproject.role_id';
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse = rows;
@@ -31,3 +31,5 @@ userProjectController.route('/add').post(async (req, res) => {
         return res.status(500).send(error);
     }
 });
+
+export default userProjectController;

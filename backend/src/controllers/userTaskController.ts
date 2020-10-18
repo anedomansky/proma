@@ -2,10 +2,10 @@ import express from 'express';
 import chalk from 'chalk';
 import dbQuery from '../db/dbQuery';
 
-export const userTaskController = express.Router();
+const userTaskController = express.Router();
 
 userTaskController.route('/all').get(async (req, res) => {
-    const query = `SELECT usertask.id as id, prouser.first_name as first_name, prouser.last_name as last_name, prouser.email as email, t.name as task FROM user_task as usertask INNER JOIN task as t ON t.id=usertask.task_id INNER JOIN proma_user as prouser ON prouser.id=usertask.proma_user_id`;
+    const query = 'SELECT usertask.id as id, prouser.first_name as first_name, prouser.last_name as last_name, prouser.email as email, t.name as task FROM user_task as usertask INNER JOIN task as t ON t.id=usertask.task_id INNER JOIN proma_user as prouser ON prouser.id=usertask.proma_user_id';
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse = rows;
@@ -31,3 +31,5 @@ userTaskController.route('/add').post(async (req, res) => {
         return res.status(500).send(error);
     }
 });
+
+export default userTaskController;
