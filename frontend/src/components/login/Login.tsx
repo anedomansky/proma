@@ -1,5 +1,7 @@
+import { observer } from 'mobx-react-lite/dist/observer';
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import useStores from '../../hooks/useStores';
 import Button from '../button/Button';
 import Input from '../input/Input';
 import './Login.scss';
@@ -9,12 +11,14 @@ interface Params {
 }
 
 const Login: React.FC = () => {
+    const { userStore } = useStores();
     const { registered } = useParams<Params>();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const login = () => {
+    const login = async () => {
         console.log('Login!');
+        await userStore.login(email, password); // TODO: test me
     };
 
     return (
@@ -59,4 +63,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default observer(Login);

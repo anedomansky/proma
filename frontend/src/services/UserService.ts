@@ -2,7 +2,7 @@ import { ErrorResponse } from '../interfaces/ErrorResponse';
 import { LoginRequest } from '../interfaces/LoginRequest';
 import { LoginResponse } from '../interfaces/LoginResponse';
 import { User } from '../interfaces/User';
-import { UserResponse } from '../interfaces/UserResponse';
+import { UserRegistration } from '../interfaces/UserRegistration';
 
 class UserService {
     public static async getAll(): Promise<User[]> {
@@ -19,7 +19,7 @@ class UserService {
         return users;
     }
 
-    public static async getByEmail(email: string): Promise<UserResponse | null> {
+    public static async getByEmail(email: string): Promise<User | null> {
         const response = await fetch(`http://localhost:4001/users/getByEmail/${email}`);
         const { status } = response;
         if (status === 404) {
@@ -29,11 +29,11 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const user: UserResponse = await response.json();
+        const user: User = await response.json();
         return user;
     }
 
-    public static async register(firstName: string, lastName: string, email: string, password: string): Promise<UserResponse> {
+    public static async register(firstName: string, lastName: string, email: string, password: string): Promise<User> {
         let isAdmin = false;
         const checkIfUsersExist = await fetch('http://localhost:4001/users/all');
         if (checkIfUsersExist.status === 404) {
@@ -50,18 +50,18 @@ class UserService {
                 email,
                 password,
                 isAdmin,
-            } as User),
+            } as UserRegistration),
         });
         const { status } = response;
         if (status === 500) {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const newUser: UserResponse = await response.json();
+        const newUser: User = await response.json();
         return newUser;
     }
 
-    public static async login(email: string, password: string): Promise<string> {
+    public static async login(email: string, password: string): Promise<LoginResponse> {
         const response = await fetch('http://localhost:4001/users/login', {
             method: 'POST',
             headers: {
@@ -75,18 +75,18 @@ class UserService {
         const { status } = response;
         if (status === 404) {
             const noUser: LoginResponse = await response.json();
-            return noUser.message;
+            return noUser;
         }
         if (status === 403) {
             const wrongCredentials: LoginResponse = await response.json();
-            return wrongCredentials.message;
+            return wrongCredentials;
         }
         if (status === 500) {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
         const success: LoginResponse = await response.json(); // TODO: save the received JWT token in storage; send it with every request
-        return success.message;
+        return success;
     }
 }
 

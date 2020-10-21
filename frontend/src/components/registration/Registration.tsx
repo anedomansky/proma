@@ -1,11 +1,13 @@
+import { observer } from 'mobx-react-lite/dist/observer';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserService from '../../services/UserService';
+import useStores from '../../hooks/useStores';
 import Button from '../button/Button';
 import Input from '../input/Input';
 import './Registration.scss';
 
 const Registration: React.FC = () => {
+    const { userStore } = useStores();
     const history = useHistory();
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
@@ -17,7 +19,7 @@ const Registration: React.FC = () => {
         console.log('Registration!');
         try {
             console.log(firstName, lastName, email, password);
-            await UserService.register(firstName, lastName, email, password);
+            await userStore.register(firstName, lastName, email, password);
             history.push('/login/successful');
         } catch (error) {
             console.error(error);
@@ -106,4 +108,4 @@ const Registration: React.FC = () => {
     );
 };
 
-export default Registration;
+export default observer(Registration);

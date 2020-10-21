@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dbQuery from '../db/dbQuery';
 import { User } from '../interfaces/User';
-import { UserResponse } from '../interfaces/UserResponse';
+import { UserAuth } from '../interfaces/UserAuth';
 
 dotenv.config();
 
@@ -28,10 +28,10 @@ userController.route('/all').get(async (req, res) => {
 
 userController.route('/getByEmail/:email').get(async (req, res) => {
     const { email } = req.params;
-    const query = 'SELECT first_name as firstName, last_name as lastName, email, is_admin as isAdmin FROM proma_user WHERE email = $1';
+    const query = 'SELECT first_name as firstName, last_name as lastName, email, created_on as createdOn, is_admin as isAdmin FROM proma_user WHERE email = $1';
     try {
         const { rows } = await dbQuery.query(query, [email]);
-        const dbResponse: UserResponse = rows[0];
+        const dbResponse: User = rows[0];
         if (!dbResponse) {
             return res.status(404).send({ message: 'No user found!' });
         }
@@ -55,10 +55,11 @@ userController.route('/register').post(async (req, res) => {
     try {
         const { rows } = await dbQuery.query(query, values);
         const dbResponse: User = rows[0];
-        const userResponse: UserResponse = {
+        const userResponse: User = {
             firstName: dbResponse.firstName,
             lastName: dbResponse.lastName,
             email: dbResponse.email,
+            createdOn: dbResponse.createdOn,
             isAdmin: dbResponse.isAdmin,
         };
         return res.status(200).send(userResponse);
@@ -73,16 +74,17 @@ userController.route('/login').post(async (req, res) => {
     const query = 'SELECT first_name as firstName, last_name as lastName, email, password, is_admin as isAdmin FROM proma_user WHERE email = $1';
     try {
         const { rows } = await dbQuery.query(query, [email]);
-        const dbResponse: User = rows[0];
+        const dbResponse: UserAuth = rows[0];
         if (!dbResponse) {
             return res.status(404).send({ message: 'NO_USER_FOUND', token: '' });
         }
         if (bcrypt.compareSync(password, dbResponse.password)) {
             const secret = process.env.SECRET;
-            const userResponse: UserResponse = {
+            const userResponse: User = {
                 firstName: dbResponse.firstName,
                 lastName: dbResponse.lastName,
                 email: dbResponse.email,
+                createdOn: dbResponse.createdOn,
                 isAdmin: dbResponse.isAdmin,
             };
             const token = jwt.sign(userResponse, secret as string, { expiresIn: 60 }); // 60 = 60 seconds, 1h, 3d
