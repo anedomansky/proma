@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react-lite/dist/observer';
+import { observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useStores from '../../hooks/useStores';

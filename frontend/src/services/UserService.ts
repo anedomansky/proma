@@ -85,7 +85,7 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const success: LoginResponse = await response.json(); // TODO: save the received JWT token in storage; send it with every request
+        const success: LoginResponse = await response.json();
         return success;
     }
 }

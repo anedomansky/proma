@@ -5,14 +5,14 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dbQuery from '../db/dbQuery';
 import { User } from '../interfaces/User';
-import { UserAuth } from '../interfaces/UserAuth';
+import { UserDB } from '../interfaces/UserDB';
 
 dotenv.config();
 
 const userController = express.Router();
 
 userController.route('/all').get(async (req, res) => {
-    const query = 'SELECT first_name as firstName, last_name as lastName, email, created_on as createdOn, is_admin as isAdmin FROM proma_user';
+    const query = 'SELECT first_name, last_name, email, created_on, is_admin FROM proma_user';
     try {
         const { rows } = await dbQuery.query(query);
         const dbResponse: User[] = rows;
@@ -26,9 +26,29 @@ userController.route('/all').get(async (req, res) => {
     }
 });
 
-userController.route('/getByEmail/:email').get(async (req, res) => {
+userController.get('/getByEmail/:email', (req, res, next) => {
+    const { token } = req.headers;
+    if (!token) {
+        return res.status(403).send({ message: 'No token provided!' });
+    }
+    try {
+        const secret = process.env.SECRET;
+        const decoded: User = jwt.verify(token as string, secret as string) as User;
+        req.body = {
+            email: decoded.email,
+            createdOn: decoded.createdOn,
+            isAdmin: decoded.isAdmin,
+            firstName: decoded.firstName,
+            lastName: decoded.lastName,
+        };
+        next();
+    } catch (error) {
+        console.error(chalk.red('Authentication failed:', error));
+        return res.status(500).send({ message: error.message });
+    }
+}, async (req, res) => {
     const { email } = req.params;
-    const query = 'SELECT first_name as firstName, last_name as lastName, email, created_on as createdOn, is_admin as isAdmin FROM proma_user WHERE email = $1';
+    const query = 'SELECT first_name, last_name, email, created_on, is_admin FROM proma_user WHERE email = $1';
     try {
         const { rows } = await dbQuery.query(query, [email]);
         const dbResponse: User = rows[0];
@@ -43,7 +63,6 @@ userController.route('/getByEmail/:email').get(async (req, res) => {
 });
 
 userController.route('/register').post(async (req, res) => {
-    console.log(chalk.bgCyanBright(req.body.email));
     const {
         email, firstName, lastName, password, isAdmin,
     } = req.body;
@@ -54,15 +73,15 @@ userController.route('/register').post(async (req, res) => {
     const values = [firstName, lastName, email, hashedPassword, isAdmin];
     try {
         const { rows } = await dbQuery.query(query, values);
-        const dbResponse: User = rows[0];
+        const dbResponse: UserDB = rows[0];
         const userResponse: User = {
-            firstName: dbResponse.firstName,
-            lastName: dbResponse.lastName,
+            firstName: dbResponse.first_name,
+            lastName: dbResponse.last_name,
             email: dbResponse.email,
-            createdOn: dbResponse.createdOn,
-            isAdmin: dbResponse.isAdmin,
+            createdOn: dbResponse.created_on,
+            isAdmin: dbResponse.is_admin,
         };
-        return res.status(200).send(userResponse);
+        return res.status(200).send(userResponse); // this returns just the "email"-field because of database = first_name and reponse = firstName
     } catch (error) {
         console.error(chalk.red('An error occurred while creating the user:', error));
         return res.status(500).send({ message: error.message });
@@ -71,21 +90,21 @@ userController.route('/register').post(async (req, res) => {
 
 userController.route('/login').post(async (req, res) => {
     const { email, password } = req.body;
-    const query = 'SELECT first_name as firstName, last_name as lastName, email, password, is_admin as isAdmin FROM proma_user WHERE email = $1';
+    const query = 'SELECT first_name, last_name, email, password, is_admin FROM proma_user WHERE email = $1';
     try {
         const { rows } = await dbQuery.query(query, [email]);
-        const dbResponse: UserAuth = rows[0];
+        const dbResponse: UserDB = rows[0];
         if (!dbResponse) {
             return res.status(404).send({ message: 'NO_USER_FOUND', token: '' });
         }
-        if (bcrypt.compareSync(password, dbResponse.password)) {
+        if (bcrypt.compareSync(password, dbResponse.password as string)) {
             const secret = process.env.SECRET;
             const userResponse: User = {
-                firstName: dbResponse.firstName,
-                lastName: dbResponse.lastName,
+                firstName: dbResponse.first_name,
+                lastName: dbResponse.last_name,
                 email: dbResponse.email,
-                createdOn: dbResponse.createdOn,
-                isAdmin: dbResponse.isAdmin,
+                createdOn: dbResponse.created_on,
+                isAdmin: dbResponse.is_admin,
             };
             const token = jwt.sign(userResponse, secret as string, { expiresIn: 60 }); // 60 = 60 seconds, 1h, 3d
             return res.status(200).send({ message: 'LOGIN_SUCCESS', token, user: userResponse });
