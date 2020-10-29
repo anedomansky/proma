@@ -13,7 +13,7 @@
     "url": "ssh://git@github.com:22/anedomansky/proma.git"
   },
   "author": "Alexander Nedomansky <anedomansky@googlemail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/anedomansky/proma/issues"
   },

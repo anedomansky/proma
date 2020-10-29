@@ -6,12 +6,13 @@ import bcrypt from 'bcrypt';
 import dbQuery from '../db/dbQuery';
 import { User } from '../interfaces/User';
 import { UserDB } from '../interfaces/UserDB';
+import verifyToken from '../helpers/verifyToken';
 
 dotenv.config();
 
 const userController = express.Router();
 
-userController.route('/all').get(async (req, res) => {
+userController.get('/all', verifyToken, async (req, res) => {
     const query = 'SELECT first_name, last_name, email, created_on, is_admin FROM proma_user';
     try {
         const { rows } = await dbQuery.query(query);
@@ -26,32 +27,12 @@ userController.route('/all').get(async (req, res) => {
     }
 });
 
-userController.get('/getByEmail/:email', (req, res, next) => {
-    const { token } = req.headers;
-    if (!token) {
-        return res.status(403).send({ message: 'No token provided!' });
-    }
-    try {
-        const secret = process.env.SECRET;
-        const decoded: User = jwt.verify(token as string, secret as string) as User;
-        req.body = {
-            email: decoded.email,
-            createdOn: decoded.createdOn,
-            isAdmin: decoded.isAdmin,
-            firstName: decoded.firstName,
-            lastName: decoded.lastName,
-        };
-        next();
-    } catch (error) {
-        console.error(chalk.red('Authentication failed:', error));
-        return res.status(500).send({ message: error.message });
-    }
-}, async (req, res) => {
+userController.get('/getByEmail/:email', verifyToken, async (req, res) => {
     const { email } = req.params;
     const query = 'SELECT first_name, last_name, email, created_on, is_admin FROM proma_user WHERE email = $1';
     try {
         const { rows } = await dbQuery.query(query, [email]);
-        const dbResponse: User = rows[0];
+        const dbResponse: UserDB = rows[0];
         if (!dbResponse) {
             return res.status(404).send({ message: 'No user found!' });
         }
@@ -64,8 +45,16 @@ userController.get('/getByEmail/:email', (req, res, next) => {
 
 userController.route('/register').post(async (req, res) => {
     const {
-        email, firstName, lastName, password, isAdmin,
+        email, firstName, lastName, password,
     } = req.body;
+    const existUserquery = 'SELECT * FROM proma_user';
+    let isAdmin = false;
+    try {
+        const { rows } = await dbQuery.query(existUserquery);
+        isAdmin = !(rows.length > 0);
+    } catch (error) {
+        console.error(chalk.red('An error occurred while fetching the users:', error));
+    }
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);

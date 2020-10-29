@@ -34,11 +34,6 @@ class UserService {
     }
 
     public static async register(firstName: string, lastName: string, email: string, password: string): Promise<User> {
-        let isAdmin = false;
-        const checkIfUsersExist = await fetch('http://localhost:4001/users/all');
-        if (checkIfUsersExist.status === 404) {
-            isAdmin = true;
-        }
         const response = await fetch('http://localhost:4001/users/register', {
             method: 'POST',
             headers: {
@@ -49,7 +44,6 @@ class UserService {
                 lastName,
                 email,
                 password,
-                isAdmin,
             } as UserRegistration),
         });
         const { status } = response;

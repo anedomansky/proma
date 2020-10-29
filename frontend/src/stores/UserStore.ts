@@ -105,6 +105,7 @@ class UserStore {
             if (loginResponse.user) {
                 this.user = loginResponse.user;
             }
+            console.log(this.token, this.user);
             // TODO: add user and token to localStorage
             // TODO: save the received JWT token in storage; send it with every request
         } catch (error) {

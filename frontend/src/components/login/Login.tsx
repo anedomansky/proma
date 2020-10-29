@@ -18,7 +18,7 @@ const Login: React.FC = () => {
 
     const login = async () => {
         console.log('Login!');
-        await userStore.login(email, password); // TODO: test me
+        await userStore.login(email, password);
     };
 
     return (

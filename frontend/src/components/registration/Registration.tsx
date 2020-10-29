@@ -16,9 +16,7 @@ const Registration: React.FC = () => {
     const [repeatedPassword, setRepeatedPassword] = useState<string>('');
 
     const register = async () => {
-        console.log('Registration!');
         try {
-            console.log(firstName, lastName, email, password);
             await userStore.register(firstName, lastName, email, password);
             history.push('/login/successful');
         } catch (error) {
