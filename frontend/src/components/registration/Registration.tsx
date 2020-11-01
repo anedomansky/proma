@@ -95,6 +95,7 @@ const Registration: React.FC = () => {
                     {repeatedPassword.length > 0 && repeatedPassword !== password && (
                         <p>Passwords do not match!</p>
                     )}
+                    {userStore.currentErrorOccurred && <p>An error occurred! Please try again later!</p>}
                     <div className="submit">
                         <Button type="submit" ariaLabel="Register" onClick={() => register()}>
                             <span>Register</span>

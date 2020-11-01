@@ -35,8 +35,8 @@ class UserStore {
         this.updatingData = false;
         this.errorOccurred = false;
         this.users = [];
-        this.user = null;
-        this.token = null; // try to get the token from localStorage
+        this.user = JSON.parse(window.localStorage.getItem('user') || '{}');
+        this.token = window.localStorage.getItem('token');
     }
 
     public get currentUpdatingData(): boolean {
@@ -52,7 +52,7 @@ class UserStore {
     }
 
     public get currentUser(): User | null {
-        return this.user; // try to get the current user from localStorage
+        return this.user;
     }
 
     public async getAll(): Promise<void> {
@@ -102,18 +102,24 @@ class UserStore {
             this.errorOccurred = false;
             const loginResponse: LoginResponse = await UserService.login(email, password);
             this.token = loginResponse.token;
+            window.localStorage.setItem('token', this.token);
             if (loginResponse.user) {
                 this.user = loginResponse.user;
+                window.localStorage.setItem('user', JSON.stringify(this.user));
             }
-            console.log(this.token, this.user);
-            // TODO: add user and token to localStorage
-            // TODO: save the received JWT token in storage; send it with every request
         } catch (error) {
             console.error(error);
             this.errorOccurred = true;
         } finally {
             this.updatingData = false;
         }
+    }
+
+    public logout(): void {
+        this.user = null;
+        this.token = null;
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('user');
     }
 }
 

@@ -25,7 +25,7 @@ const Login: React.FC = () => {
         <section className="login">
             <h2>Sign In</h2>
             <hr />
-            <h3>{`Registration ${registered}! Please proceed with the login now.`}</h3>
+            {registered && <h3>Registration successful! Please proceed with the login now.</h3>}
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="form-row">
                     <Input
