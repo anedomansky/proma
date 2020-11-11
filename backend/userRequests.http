@@ -1,0 +1,32 @@
+GET http://localhost:4001/users/all HTTP/1.1
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJIdWdvIiwibGFzdE5hbWUiOiJXaW50ZXIiLCJlbWFpbCI6Imh1Z28ud2ludGVyQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MTE3Nzg2LCJleHAiOjE2MDUxMTc4NDZ9.FE1bUfmhEGpXyPkpq3cVarLzMM-aT90R8Xidq59U9eE
+
+###
+
+GET http://localhost:4001/users/getByEmail/hugo.winter@example.com HTTP/1.1
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJIdWdvIiwibGFzdE5hbWUiOiJXaW50ZXIiLCJlbWFpbCI6Imh1Z28ud2ludGVyQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MTE3Nzg2LCJleHAiOjE2MDUxMTc4NDZ9.FE1bUfmhEGpXyPkpq3cVarLzMM-aT90R8Xidq59U9eE
+
+
+###
+
+POST http://localhost:4001/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Hugo",
+    "lastName": "Winter",
+    "email": "hugo.winter@example.com",
+    "password": "Test1234"
+}
+
+###
+
+POST http://localhost:4001/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "hugo.winter@example.com",
+    "password": "Test1234"
+}
+
+###

@@ -101,10 +101,10 @@ class UserStore {
             this.updatingData = true;
             this.errorOccurred = false;
             const loginResponse: LoginResponse = await UserService.login(email, password);
-            this.token = loginResponse.token;
-            window.localStorage.setItem('token', this.token);
-            if (loginResponse.user) {
+            if (loginResponse.user && loginResponse.token) {
+                this.token = loginResponse.token;
                 this.user = loginResponse.user;
+                window.localStorage.setItem('token', this.token);
                 window.localStorage.setItem('user', JSON.stringify(this.user));
             }
         } catch (error) {
@@ -120,6 +120,10 @@ class UserStore {
         this.token = null;
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('user');
+    }
+
+    public get isAuthenticated(): boolean { // TODO: check if this.token exists and then verifyToken
+        return !!(this.user && this.token);
     }
 }
 

@@ -84,7 +84,7 @@ userController.route('/login').post(async (req, res) => {
         const { rows } = await dbQuery.query(query, [email]);
         const dbResponse: UserDB = rows[0];
         if (!dbResponse) {
-            return res.status(404).send({ message: 'NO_USER_FOUND', token: '' });
+            return res.status(404).send({ message: 'NO_USER_FOUND' });
         }
         if (bcrypt.compareSync(password, dbResponse.password as string)) {
             const secret = process.env.SECRET;
@@ -98,7 +98,7 @@ userController.route('/login').post(async (req, res) => {
             const token = jwt.sign(userResponse, secret as string, { expiresIn: 60 }); // 60 = 60 seconds, 1h, 3d
             return res.status(200).send({ message: 'LOGIN_SUCCESS', token, user: userResponse });
         }
-        return res.status(403).send({ message: 'WRONG_CREDENTIALS', token: '' });
+        return res.status(403).send({ message: 'WRONG_CREDENTIALS' });
     } catch (error) {
         console.error(chalk.red('An error occurred while fetching the user:', error));
         return res.status(500).send({ message: error.message });
