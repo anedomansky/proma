@@ -104,6 +104,7 @@ class UserStore {
             if (loginResponse.user && loginResponse.token) {
                 this.token = loginResponse.token;
                 this.user = loginResponse.user;
+                console.log(this.user);
                 window.localStorage.setItem('token', this.token);
                 window.localStorage.setItem('user', JSON.stringify(this.user));
             }
@@ -122,8 +123,11 @@ class UserStore {
         window.localStorage.removeItem('user');
     }
 
-    public get isAuthenticated(): boolean { // TODO: check if this.token exists and then verifyToken
-        return !!(this.user && this.token);
+    public async isAuthenticated(): Promise<boolean> {
+        if (this.user && this.token) {
+            await UserService.verifyUser(this.user, this.token);
+        }
+        return false;
     }
 }
 

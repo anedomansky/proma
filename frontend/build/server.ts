@@ -13,7 +13,7 @@ if (!process.env.NODE_ENV) {
 
 dotenv.config();
 
-const PORT = process.env.PORT || 4000;
+const { PORT } = process.env;
 // only opens the browser automatically if a value is set -> !true === false, !'' === false
 const autoOpenBrowser = !!process.env.AUTO_OPEN_BROWSER;
 const app = express();

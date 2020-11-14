@@ -30,3 +30,17 @@ content-type: application/json
 }
 
 ###
+
+POST http://localhost:4001/users/verifyUser HTTP/1.1
+content-type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJIdWdvIiwibGFzdE5hbWUiOiJXaW50ZXIiLCJlbWFpbCI6Imh1Z28ud2ludGVyQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MTE3Nzg2LCJleHAiOjE2MDUxMTc4NDZ9.FE1bUfmhEGpXyPkpq3cVarLzMM-aT90R8Xidq59U9eE
+
+{
+    "firstName": "Hugo",
+    "lastName": "Winter",
+    "email": "hugo.winter@example.com",
+    "password": "Test1234",
+    "createdOn": "2020-11-10T23:00:00.000Z"
+}
+
+###

@@ -79,7 +79,7 @@ userController.route('/register').post(async (req, res) => {
 
 userController.route('/login').post(async (req, res) => {
     const { email, password } = req.body;
-    const query = 'SELECT first_name, last_name, email, password, is_admin FROM proma_user WHERE email = $1';
+    const query = 'SELECT first_name, last_name, email, password, is_admin, created_on FROM proma_user WHERE email = $1';
     try {
         const { rows } = await dbQuery.query(query, [email]);
         const dbResponse: UserDB = rows[0];
@@ -101,6 +101,28 @@ userController.route('/login').post(async (req, res) => {
         return res.status(403).send({ message: 'WRONG_CREDENTIALS' });
     } catch (error) {
         console.error(chalk.red('An error occurred while fetching the user:', error));
+        return res.status(500).send({ message: error.message });
+    }
+});
+
+userController.route('/verifyUser').post(async (req, res) => {
+    const { token } = req.headers;
+    const {
+        email, firstName, lastName, isAdmin, createdOn,
+    } = req.body;
+    try {
+        const secret = process.env.SECRET;
+        const user: User = {
+            firstName,
+            lastName,
+            email,
+            createdOn,
+            isAdmin,
+        };
+        const decoded: User = jwt.verify(token as string, secret as string) as User;
+        return JSON.stringify(user) === JSON.stringify(decoded) && res.status(200).send({ message: 'OK' });
+    } catch (error) {
+        console.error(chalk.red('An error occurred while verifying the token:', error));
         return res.status(500).send({ message: error.message });
     }
 });

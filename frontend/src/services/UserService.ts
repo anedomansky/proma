@@ -82,6 +82,22 @@ class UserService {
         const success: LoginResponse = await response.json();
         return success;
     }
+
+    public static async verifyUser(user: User, token: string): Promise<boolean> {
+        const response = await fetch('http://localhost:4001/users/verifyUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                token,
+            },
+            body: JSON.stringify(user as User),
+        });
+        const { status } = response;
+        if (status === 200) {
+            return true;
+        }
+        return false;
+    }
 }
 
 export default UserService;
