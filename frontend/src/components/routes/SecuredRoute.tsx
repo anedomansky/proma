@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import useStores from '../../hooks/useStores';
 
@@ -10,7 +10,7 @@ const SecuredRoute: React.FC<Props> = ({ component: Component, exact, path }) =>
     const { userStore } = useStores();
     const [verified, setVerified] = useState<boolean>(true);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         (async function verifyUser() {
             const isVerified = await userStore.isAuthenticated();
             setVerified(isVerified);

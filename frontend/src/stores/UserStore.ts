@@ -31,6 +31,11 @@ class UserStore {
             getByEmail: action,
             register: action,
             login: action,
+            setUpdatingData: action,
+            setErrorOccurred: action,
+            setUsers: action,
+            setUser: action,
+            setToken: action,
         });
         this.updatingData = false;
         this.errorOccurred = false;
@@ -55,77 +60,101 @@ class UserStore {
         return this.user;
     }
 
+    public setUpdatingData(updatingData: boolean): void {
+        this.updatingData = updatingData;
+    }
+
+    public setErrorOccurred(errorOccurred: boolean): void {
+        this.errorOccurred = errorOccurred;
+    }
+
+    public setUsers(users: User[]): void {
+        this.users = users;
+    }
+
+    public setUser(user: User | null): void {
+        this.user = user;
+    }
+
+    public setToken(token: string | null): void {
+        this.token = token;
+    }
+
     public async getAll(): Promise<void> {
         try {
-            this.updatingData = true;
-            this.errorOccurred = false;
-            this.users = await UserService.getAll();
+            this.setUpdatingData(true);
+            this.setErrorOccurred(false);
+            this.setUsers(await UserService.getAll());
         } catch (error) {
             console.error(error);
-            this.errorOccurred = true;
+            this.setErrorOccurred(true);
         } finally {
-            this.updatingData = false;
+            this.setUpdatingData(false);
         }
     }
 
     public async getByEmail(email: string): Promise<User | null> {
         try {
             // TODO: first try to find the user in this.users
-            this.updatingData = true;
-            this.errorOccurred = false;
+            this.setUpdatingData(true);
+            this.setErrorOccurred(false);
             return await UserService.getByEmail(email);
         } catch (error) {
             console.error(error);
-            this.errorOccurred = true;
+            this.setErrorOccurred(true);
             return null;
         } finally {
-            this.updatingData = false;
+            this.setUpdatingData(false);
         }
     }
 
     public async register(firstName: string, lastName: string, email: string, password: string): Promise<void> {
         try {
-            this.updatingData = true;
-            this.errorOccurred = false;
+            this.setUpdatingData(true);
+            this.setErrorOccurred(false);
             await UserService.register(firstName, lastName, email, password);
         } catch (error) {
             console.error(error);
-            this.errorOccurred = true;
+            this.setErrorOccurred(true);
         } finally {
-            this.updatingData = false;
+            this.setUpdatingData(false);
         }
     }
 
     public async login(email: string, password: string): Promise<void> {
         try {
-            this.updatingData = true;
-            this.errorOccurred = false;
+            this.setUpdatingData(true);
+            this.setErrorOccurred(false);
             const loginResponse: LoginResponse = await UserService.login(email, password);
             if (loginResponse.user && loginResponse.token) {
-                this.token = loginResponse.token;
-                this.user = loginResponse.user;
-                console.log(this.user);
-                window.localStorage.setItem('token', this.token);
+                this.setToken(loginResponse.token);
+                this.setUser(loginResponse.user);
+                window.localStorage.setItem('token', this.token as string);
                 window.localStorage.setItem('user', JSON.stringify(this.user));
             }
         } catch (error) {
             console.error(error);
-            this.errorOccurred = true;
+            this.setErrorOccurred(true);
         } finally {
-            this.updatingData = false;
+            this.setUpdatingData(false);
         }
     }
 
     public logout(): void {
-        this.user = null;
-        this.token = null;
+        this.setUser(null);
+        this.setToken(null);
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('user');
     }
 
     public async isAuthenticated(): Promise<boolean> {
         if (this.user && this.token) {
-            await UserService.verifyUser(this.user, this.token);
+            const isAuthenticated = await UserService.verifyUser(this.user, this.token);
+            if (!isAuthenticated) {
+                this.logout();
+                return false;
+            }
+            return true;
         }
         return false;
     }

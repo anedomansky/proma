@@ -69,11 +69,11 @@ class UserService {
         const { status } = response;
         if (status === 404) {
             const noUser: LoginResponse = await response.json();
-            return noUser;
+            throw Error(noUser.message);
         }
         if (status === 403) {
             const wrongCredentials: LoginResponse = await response.json();
-            return wrongCredentials;
+            throw Error(wrongCredentials.message);
         }
         if (status === 500) {
             const error: ErrorResponse = await response.json();

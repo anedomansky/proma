@@ -22,7 +22,7 @@ userController.get('/all', verifyToken, async (req, res) => {
         }
         return res.status(200).send(dbResponse);
     } catch (error) {
-        console.error(chalk.red('An error occurred while fetching the users:', error));
+        console.trace(chalk.red('An error occurred while fetching the users:', error));
         return res.status(500).send({ message: error.message });
     }
 });
@@ -38,7 +38,7 @@ userController.get('/getByEmail/:email', verifyToken, async (req, res) => {
         }
         return res.status(200).send(dbResponse);
     } catch (error) {
-        console.error(chalk.red('An error occurred while fetching the user:', error));
+        console.trace(chalk.red('An error occurred while fetching the user:', error));
         return res.status(500).send({ message: error.message });
     }
 });
@@ -53,7 +53,7 @@ userController.route('/register').post(async (req, res) => {
         const { rows } = await dbQuery.query(existUserquery);
         isAdmin = !(rows.length > 0);
     } catch (error) {
-        console.error(chalk.red('An error occurred while fetching the users:', error));
+        console.trace(chalk.red('An error occurred while fetching the users:', error));
     }
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
@@ -72,7 +72,7 @@ userController.route('/register').post(async (req, res) => {
         };
         return res.status(200).send(userResponse); // this returns just the "email"-field because of database = first_name and reponse = firstName
     } catch (error) {
-        console.error(chalk.red('An error occurred while creating the user:', error));
+        console.trace(chalk.red('An error occurred while creating the user:', error));
         return res.status(500).send({ message: error.message });
     }
 });
@@ -100,7 +100,7 @@ userController.route('/login').post(async (req, res) => {
         }
         return res.status(403).send({ message: 'WRONG_CREDENTIALS' });
     } catch (error) {
-        console.error(chalk.red('An error occurred while fetching the user:', error));
+        console.trace(chalk.red('An error occurred while fetching the user:', error));
         return res.status(500).send({ message: error.message });
     }
 });
@@ -122,7 +122,7 @@ userController.route('/verifyUser').post(async (req, res) => {
         const decoded: User = jwt.verify(token as string, secret as string) as User;
         return JSON.stringify(user) === JSON.stringify(decoded) && res.status(200).send({ message: 'OK' });
     } catch (error) {
-        console.error(chalk.red('An error occurred while verifying the token:', error));
+        console.trace(chalk.red('An error occurred while verifying the token:', error));
         return res.status(500).send({ message: error.message });
     }
 });

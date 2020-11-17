@@ -5,20 +5,28 @@ header {
     background-color: $primary1;
     color: $primary3;
     display: grid;
-    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    grid-template-areas: "logo title user";
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
+    padding: 0 0.5rem 0 0.5rem;
 
     .logo {
-        width: 6rem;
-        height: auto;
+        grid-area: logo;
+        
+        .logo__img {
+            width: 6rem;
+            height: auto;
+        }
     }
 
     .title {
+        grid-area: title;
         margin: 0;
         font-size: 1.5rem;
     }
 
     div {
+        grid-area: user;
         display: flex;
         justify-content: flex-end;
 
@@ -31,14 +39,16 @@ header {
 }
 
 
-@media (min-width: 375px) {
+@media (min-width: 768px) {
     header {
         grid-area: header;
         background-color: $primary1;
         color: $primary3;
         display: grid;
-        grid-template-columns: repeat(3, minmax(auto, 1fr));
+        grid-template-areas: ". logo title user .";
+        grid-template-columns: repeat(5, 1fr);
         align-items: center;
+        padding: 1rem 0 1rem 0;
     
         .logo {
             width: 10rem;

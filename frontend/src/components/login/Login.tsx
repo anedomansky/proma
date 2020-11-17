@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import useStores from '../../hooks/useStores';
 import Button from '../button/Button';
 import Input from '../input/Input';
@@ -13,12 +13,13 @@ interface Params {
 const Login: React.FC = () => {
     const { userStore } = useStores();
     const { registered } = useParams<Params>();
+    const history = useHistory();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
     const login = async () => {
-        console.log('Login!');
         await userStore.login(email, password);
+        history.push('/');
     };
 
     return (
@@ -26,6 +27,7 @@ const Login: React.FC = () => {
             <h2>Sign In</h2>
             <hr />
             {registered && <h3>Registration successful! Please proceed with the login now.</h3>}
+            {userStore.currentErrorOccurred && <h3 className="login-fail">Login failed! Wrong credentials!</h3>}
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="form-row">
                     <Input

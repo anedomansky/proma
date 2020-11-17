@@ -10,7 +10,7 @@ const Header: React.FC = () => {
 
     return (
         <header>
-            <Link to="/"><img className="logo" src={logoImg} alt="Logo" /></Link>
+            <Link to="/" className="logo"><img className="logo__img" src={logoImg} alt="Logo" /></Link>
             <h1 className="title">Fancy IT Company Name</h1>
             <div>
                 {!(location.pathname === '/register' || location.pathname === '/login') && (

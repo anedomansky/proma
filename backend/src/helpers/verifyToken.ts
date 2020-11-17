@@ -23,7 +23,7 @@ const verifyToken: RequestHandler = (req, res, next) => {
         };
         next();
     } catch (error) {
-        console.error(chalk.red('Authentication failed:', error));
+        console.trace(chalk.red('Authentication failed:', error));
         return res.status(500).send({ message: error.message });
     }
 };
