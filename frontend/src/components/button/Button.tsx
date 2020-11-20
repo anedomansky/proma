@@ -4,7 +4,7 @@ import './Button.scss';
 interface Props {
     type: 'submit' | 'button' | 'reset';
     onClick: () => void;
-    ariaLabel: string;
+    ariaLabel?: string;
 }
 
 const Button: React.FC<Props> = ({ type, onClick, ariaLabel, children }) => (

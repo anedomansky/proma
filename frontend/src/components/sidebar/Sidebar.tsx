@@ -7,7 +7,7 @@ const Sidebar: React.FC = () => {
 
     return (
         <>
-            {location.pathname !== '/login' && location.pathname !== '/register' ? (
+            {!location.pathname.startsWith('/login') && location.pathname !== '/register' ? (
                 <nav>SIDEBAR</nav>
             )
                 : null}

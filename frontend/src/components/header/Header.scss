@@ -25,15 +25,36 @@ header {
         font-size: 1.5rem;
     }
 
-    div {
+    .user {
         grid-area: user;
         display: flex;
         justify-content: flex-end;
+        position: relative;
 
-        .user-menu {
+        .user__icon {
             width: 4rem;
             height: auto;
             justify-self: end;
+        }
+
+        .user__menu {
+            position: absolute;
+            right: 0;
+            bottom: -2rem;
+            margin: 0;
+            padding: 0;
+            background-color: $primary2;
+            color: $accent1;
+
+            li {
+                list-style: none;
+                padding: 0.25rem 0.5rem;
+                border: 1px solid $accent1;
+                
+                button {
+                    font-size: $bodyFont;
+                }
+            }
         }
     }
 }
