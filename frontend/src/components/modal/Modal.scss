@@ -1,0 +1,64 @@
+@import '../../utilities/variables';
+
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: $accent1Light;
+
+    .modal__content {
+        position: relative;
+        margin: auto;
+        width: 70%;
+        background-color: $primary2;
+
+        .modal__header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem;
+
+            img {
+                width: 2rem;
+                height: auto;
+            }
+        }
+
+        .modal__body {
+            p {
+                text-align: center;
+                color: $accent1;
+            }
+        }
+
+        .modal__footer {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 1rem;
+
+            button {
+                border: 1px solid $accent1;
+
+                &:hover {
+                    background-color: $primary3;
+                }
+            }
+
+            img {
+                width: 2rem;
+                height: auto;
+            }
+
+            span {
+                font-size: $bodyFont;
+            }
+        }
+    }
+}
+
+.show {
+    display: block;
+}

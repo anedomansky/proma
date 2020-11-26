@@ -50,6 +50,10 @@ header {
                 list-style: none;
                 padding: 0.25rem 0.5rem;
                 border: 1px solid $accent1;
+
+                &:hover {
+                    background-color: $primary3;
+                }
                 
                 button {
                     font-size: $bodyFont;

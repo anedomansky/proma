@@ -2,7 +2,9 @@
 
 button {
     cursor: pointer;
-    
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .submit-btn {

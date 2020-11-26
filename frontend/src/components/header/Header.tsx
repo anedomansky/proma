@@ -6,12 +6,14 @@ import userIcon from '../../assets/icons/user.svg';
 import './Header.scss';
 import Button from '../button/Button';
 import useStores from '../../hooks/useStores';
+import Modal from '../modal/Modal';
 
 const Header: React.FC = () => {
     const { userStore } = useStores();
     const location = useLocation();
     const history = useHistory();
     const [show, setShow] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const ref = useRef(null);
 
     useEffect(() => {
@@ -29,6 +31,7 @@ const Header: React.FC = () => {
 
     const logout = () => {
         userStore.logout();
+        setShowModal(false);
         setShow(false);
         history.push('/login');
     };
@@ -47,7 +50,7 @@ const Header: React.FC = () => {
                             show && (
                                 <ul className="user__menu">
                                     <li>
-                                        <Button type="button" onClick={() => logout()}>
+                                        <Button type="button" onClick={() => setShowModal(true)}>
                                             Logout
                                         </Button>
                                     </li>
@@ -57,6 +60,7 @@ const Header: React.FC = () => {
                     </>
                 )}
             </div>
+            <Modal show={showModal} text="Do you really want to log out now?" cancel={() => setShowModal(false)} confirm={() => logout()} />
         </header>
     );
 };
