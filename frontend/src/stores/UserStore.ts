@@ -60,6 +60,13 @@ class UserStore {
         return this.user;
     }
 
+    public get isAdmin(): boolean {
+        if (this.user) {
+            return this.user.isAdmin;
+        }
+        return false;
+    }
+
     public setUpdatingData(updatingData: boolean): void {
         this.updatingData = updatingData;
     }

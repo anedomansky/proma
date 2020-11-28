@@ -1,12 +1,14 @@
+import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
-import logoImg from '../../assets/images/logo.svg';
+import plusIcon from '../../assets/icons/plus.svg';
 import userIcon from '../../assets/icons/user.svg';
-import './Header.scss';
-import Button from '../button/Button';
+import logoImg from '../../assets/images/logo.svg';
 import useStores from '../../hooks/useStores';
+import Button from '../button/Button';
+import List from '../list/List';
 import Modal from '../modal/Modal';
+import './Header.scss';
 
 const Header: React.FC = () => {
     const { userStore } = useStores();
@@ -36,10 +38,24 @@ const Header: React.FC = () => {
         history.push('/login');
     };
 
+    const renderTitle = () => {
+        if (userStore.isAdmin) {
+            return (
+                <h1 className="title">
+                    Fancy IT Company Name
+                    <Button type="button" onClick={() => null}>
+                        <img src={plusIcon} alt="Add project" />
+                    </Button>
+                </h1>
+            );
+        }
+        return <h1 className="title">Fancy IT Company Name</h1>;
+    };
+
     return (
         <header>
             <Link to="/" className="logo"><img className="logo__img" src={logoImg} alt="Logo" /></Link>
-            <h1 className="title">Fancy IT Company Name</h1>
+            {renderTitle()}
             <div className="user" ref={ref}>
                 {!(location.pathname === '/register' || location.pathname.startsWith('/login')) && (
                     <>
@@ -48,13 +64,11 @@ const Header: React.FC = () => {
                         </Button>
                         {
                             show && (
-                                <ul className="user__menu">
-                                    <li>
-                                        <Button type="button" onClick={() => setShowModal(true)}>
-                                            Logout
-                                        </Button>
-                                    </li>
-                                </ul>
+                                <List>
+                                    <Button type="button" onClick={() => setShowModal(true)}>
+                                        Logout
+                                    </Button>
+                                </List>
                             )
                         }
                     </>

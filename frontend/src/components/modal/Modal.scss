@@ -2,6 +2,7 @@
 
 .modal {
     display: none;
+    padding-top: 100px;
     position: fixed;
     left: 0;
     top: 0;
@@ -15,6 +16,7 @@
         margin: auto;
         width: 70%;
         background-color: $primary2;
+        box-shadow: 0 4px 8px 0 $accent1Light,0 6px 20px 0 $accent1Light;
 
         .modal__header {
             display: flex;

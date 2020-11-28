@@ -1,0 +1,25 @@
+@import '../../utilities/variables';
+
+ul {
+    position: absolute;
+    right: 0;
+    bottom: -2rem;
+    margin: 0;
+    padding: 0;
+    background-color: $primary2;
+    color: $accent1;
+
+    li {
+        list-style: none;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid $accent1;
+
+        &:hover {
+            background-color: $primary3;
+        }
+        
+        & > * {
+            font-size: $bodyFont;
+        }
+    }
+}

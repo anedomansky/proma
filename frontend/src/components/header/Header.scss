@@ -23,6 +23,13 @@ header {
         grid-area: title;
         margin: 0;
         font-size: 1.5rem;
+        display: flex;
+        justify-content: space-evenly;
+
+        img {
+            width: 2rem;
+            height: auto;
+        }
     }
 
     .user {
@@ -35,30 +42,6 @@ header {
             width: 4rem;
             height: auto;
             justify-self: end;
-        }
-
-        .user__menu {
-            position: absolute;
-            right: 0;
-            bottom: -2rem;
-            margin: 0;
-            padding: 0;
-            background-color: $primary2;
-            color: $accent1;
-
-            li {
-                list-style: none;
-                padding: 0.25rem 0.5rem;
-                border: 1px solid $accent1;
-
-                &:hover {
-                    background-color: $primary3;
-                }
-                
-                button {
-                    font-size: $bodyFont;
-                }
-            }
         }
     }
 }

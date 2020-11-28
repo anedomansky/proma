@@ -4,4 +4,11 @@ nav {
     grid-area: sidebar;
     background-color: $primary1;
     color: $primary3;
+    max-width: 75px;
+}
+
+@media (min-width: 768px) {
+    nav {
+        max-width: initial;
+    }
 }

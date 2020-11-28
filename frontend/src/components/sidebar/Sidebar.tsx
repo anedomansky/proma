@@ -8,7 +8,7 @@ const Sidebar: React.FC = () => {
     return (
         <>
             {!location.pathname.startsWith('/login') && location.pathname !== '/register' ? (
-                <nav>SIDEBAR</nav>
+                <nav>No Projects available!</nav>
             )
                 : null}
         </>
