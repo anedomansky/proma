@@ -5,7 +5,7 @@ interface Props {
     label: string;
     id: string;
     type: string;
-    pattern: string;
+    pattern?: string;
     title?: string;
     minLength?: number;
     maxLength?: number;

@@ -12,36 +12,22 @@
         box-shadow: 0 2px 4px $accent1Light;
     }
 
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
-        grid-template-rows: auto auto auto;
-        grid-row-gap: 1rem;
-        margin-bottom: 2rem;
+    p {
+        grid-row-start: 1;
+        grid-row-end: 1;
+        grid-column-start: 2;
+        grid-column-end: 2;
+        color: $accent2;
+        font-size: 1.5rem;
+        text-align: center;
+    }
 
-        label, input, .submit, p {
-            grid-row-start: 2;
-            grid-row-end: 2;
-            grid-column-start: 2;
-            grid-column-end: 2;
-        }
-
-        label {
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-
-        p {
-            grid-row-start: 1;
-            grid-row-end: 1;
-            color: $accent2;
-            font-size: 1.5rem;
-            text-align: center;
-        }
-
-        .submit {
-            display: flex;
-            justify-content: center;
-        }
+    .submit {
+        grid-row-start: 2;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 2;
+        display: flex;
+        justify-content: center;
     }
 }

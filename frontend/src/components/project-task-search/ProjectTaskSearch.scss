@@ -1,0 +1,14 @@
+@import '../../utilities/variables';
+
+.project-task-search {
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    h2 {
+        text-align: center;
+    }
+
+    hr {
+        box-shadow: 0 2px 4px $accent1Light;
+    }
+}

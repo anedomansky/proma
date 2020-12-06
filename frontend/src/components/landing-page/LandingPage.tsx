@@ -1,9 +1,10 @@
 import React from 'react';
+import ProjectTaskSearch from '../project-task-search/ProjectTaskSearch';
 import './LandingPage.scss';
 
 const LandingPage: React.FC = () => (
     <section className="landing-page">
-        <h2>Please select one of the projects on the left or search for a task directly</h2>
+        <ProjectTaskSearch />
     </section>
 );
 
