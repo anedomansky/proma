@@ -59,7 +59,7 @@ const Header: React.FC = () => {
             <div className="user" ref={ref}>
                 {!(location.pathname === '/register' || location.pathname.startsWith('/login')) && (
                     <>
-                        <Button type="button" ariaLabel="User menu" onClick={() => setShow(!show)}>
+                        <Button type="button" onClick={() => setShow(!show)}>
                             <img className="user__icon" src={userIcon} alt="User-menu" />
                         </Button>
                         {

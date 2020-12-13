@@ -17,7 +17,7 @@ const ProjectTaskSearch: React.FC = () => {
 
     return (
         <section className="project-task-search">
-            <h2>Project-Task Search</h2>
+            <h2>Search</h2>
             <hr />
             <Form>
                 <>
