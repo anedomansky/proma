@@ -28,6 +28,7 @@
         "import/extensions": "off",
         "import/no-unresolved": "off",
         "no-console": "off",
-        "max-len": "off"
+        "max-len": "off",
+        "no-unused-vars": "off"
     }
 }

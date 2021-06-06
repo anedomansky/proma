@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import chalk from 'chalk';
-import { createAllTables, dropAllTables } from './db/dbConnection';
 import userController from './controllers/userController';
 import roleController from './controllers/roleController';
 import projectController from './controllers/projectController';
@@ -15,9 +14,6 @@ import userProjectController from './controllers/userProjectController';
 dotenv.config();
 
 const { PORT } = process.env;
-
-// dropAllTables();
-createAllTables();
 
 const app = express();
 app.use(cors());
