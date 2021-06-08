@@ -1,4 +1,5 @@
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
@@ -7,7 +8,7 @@ const baseConfig: webpack.Configuration = {
     module: {
         rules: [
             {
-                test: /\.s?css$/,
+                test: /.s?css$/,
                 exclude: /node_modules/,
                 use: [
                     'style-loader',
@@ -16,7 +17,7 @@ const baseConfig: webpack.Configuration = {
                 ],
             },
             {
-                test: /\.tsx?$/,
+                test: /.tsx?$/,
                 exclude: /node_modules/,
                 loader: 'ts-loader',
                 options: {
@@ -25,7 +26,7 @@ const baseConfig: webpack.Configuration = {
                 },
             },
             {
-                test: /\.(jpg|png|svg)$/,
+                test: /.(jpg|png|svg)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[hash].[ext]',
@@ -41,6 +42,9 @@ const baseConfig: webpack.Configuration = {
             // favicon: path.resolve(__dirname, '../src/assets/icons/favicon.ico'),
         }),
         new FriendlyErrorsWebpackPlugin(),
+        new ForkTsCheckerWebpackPlugin({
+            eslint: true,
+        }),
     ],
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
