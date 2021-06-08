@@ -70,7 +70,7 @@ userController.route('/register').post(async (req, res) => {
             createdOn: dbResponse.created_on,
             isAdmin: dbResponse.is_admin,
         };
-        return res.status(200).send(userResponse); // this returns just the "email"-field because of database = first_name and reponse = firstName
+        return res.status(200).send(userResponse);
     } catch (error) {
         console.trace(chalk.red('An error occurred while creating the user:', error));
         return res.status(500).send({ message: error.message });
