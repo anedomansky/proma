@@ -2,8 +2,8 @@
 
 header {
     grid-area: header;
-    background-color: $primary1;
-    color: $primary3;
+    background-color: $brown-200;
+    color: $brown-500;
     display: grid;
     grid-template-areas: "logo title user";
     grid-template-columns: repeat(3, 1fr);
@@ -50,8 +50,8 @@ header {
 @media (min-width: 768px) {
     header {
         grid-area: header;
-        background-color: $primary1;
-        color: $primary3;
+        background-color: $brown-200;
+        color: $brown-500;
         display: grid;
         grid-template-areas: ". logo title user .";
         grid-template-columns: repeat(5, 1fr);

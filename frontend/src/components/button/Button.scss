@@ -9,15 +9,16 @@ button {
 }
 
 .submit-btn {
-    border: 1px solid $accent1;
-    background-color: $primary2;
+    border: 1px solid $blue-500;
+    background-color: $blue-500;
     font-size: 1.5rem;
     padding: 0.5rem 2rem 0.5rem 2rem;
+    color: $blue-300;
 
     &:hover {
-        border: 1px solid $accent3;
-        color: $primary2;
-        background-color: $accent3;
+        border: 1px solid $blue-300;
+        color: $blue-500;
+        background-color: $blue-300;
     }
 }
 

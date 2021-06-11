@@ -2,11 +2,14 @@
 
 label, input {
     font-size: 1.5rem;
+    color: $gray-200;
 }
 
 input {
     padding: 0.5rem;
     border-radius: 0.75rem;
-    border: 1px solid $accent1;
-    box-shadow: inset 0px 1px 8px $accent1Light;
+    border: 1px solid $gray-300;
+    box-shadow: inset 0px 1px 5px $gray-300;
+    background-color: $gray-500;
+    color: $gray-300;
 }

@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "Frontend part of the project management app.",
-  "main": "index.js",
+  "main": "dist/index.bundle.js",
   "scripts": {
     "start": "ts-node ./build/server.ts",
     "test": "jest --silent --collectCoverage",

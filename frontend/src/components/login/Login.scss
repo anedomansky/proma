@@ -6,10 +6,12 @@
 
     h2 {
         text-align: center;
+        color: $gray-100;
     }
 
     hr {
         box-shadow: 0 2px 4px $accent1Light;
+        color: $gray-100;
     }
 
     h3 {
@@ -33,7 +35,7 @@
 
         .register {
             font-size: 1.5rem;
-            color: $primary3;
+            color: $blue-300;
         }
     }
 }

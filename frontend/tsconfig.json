@@ -10,7 +10,8 @@
         "jsx": "react",
         "alwaysStrict": true,
         "experimentalDecorators": true,
-        "useDefineForClassFields": true
+        "useDefineForClassFields": true,
+        "skipLibCheck": true
     },
     "include": [
         "src/**/*",

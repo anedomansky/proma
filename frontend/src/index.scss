@@ -1,8 +1,7 @@
 @import './utilities/variables';
 
-
 * {
-    font-family: Lato, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     box-sizing: border-box; // Include padding and border in the element's total width and height
 }
 
@@ -24,7 +23,7 @@ body {
         font-weight: normal;
     }
 
-    input {
-        outline-color: $primary3;
+    input:focus, a:focus, button:focus {
+        outline: $blue-300 solid 3px;
     }
 }

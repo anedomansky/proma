@@ -14,15 +14,16 @@
         color: $accent1;
         display: grid;
         overflow: auto;
+        background-color: $gray-500;
     }
 }
 
 @media (min-width: 768px) {
     .content {
         main {
-            border-bottom: 0.5rem solid $primary1;
-            border-left: 0.5rem solid $primary1;
-            border-right: 0.5rem solid $primary1;
+            border-bottom: 0.5rem solid $brown-200;
+            border-left: 0.5rem solid $brown-200;
+            border-right: 0.5rem solid $brown-200;
         }
     }
 }
