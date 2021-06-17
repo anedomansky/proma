@@ -26,7 +26,7 @@ const ProjectTaskSearch: React.FC = () => {
                         id="search"
                         type="text"
                         value={term}
-                        onChange={(event) => search(event.target.value)}
+                        onChange={(event) => null}
                     />
                     {/* TODO: use List here */}
                 </>

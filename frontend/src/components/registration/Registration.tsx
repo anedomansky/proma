@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useStores from '../../hooks/useStores';
+import { RegistrationValidation } from '../../interfaces/RegistrationValidation';
 import Button from '../button/Button';
 import Form from '../form/Form';
 import Input from '../input/Input';
@@ -10,18 +11,44 @@ import './Registration.scss';
 const Registration: React.FC = () => {
     const { userStore } = useStores();
     const history = useHistory();
-    const [firstName, setFirstName] = useState<string>('');
-    const [lastName, setLastName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [repeatedPassword, setRepeatedPassword] = useState<string>('');
+    const [formValid, setFormValid] = useState<boolean>(false);
+    const [userValidation, setUserValidation] = useState<RegistrationValidation>({
+        firstName: {
+            value: '',
+            valid: false,
+        },
+        lastName: {
+            value: '',
+            valid: false,
+        },
+        email: {
+            value: '',
+            valid: false,
+        },
+        password: {
+            value: '',
+            valid: false,
+        },
+        repeatedPassword: {
+            value: '',
+            valid: false,
+        },
+    });
+
+    useEffect(() => {
+        setFormValid(
+            userValidation.firstName.valid
+            && userValidation.lastName.valid
+            && userValidation.email.valid
+            && userValidation.password.valid
+            && (userValidation.password.value === userValidation.repeatedPassword.value),
+        );
+    }, [formValid, userValidation.email.valid, userValidation.firstName, userValidation.lastName.valid, userValidation.password.valid, userValidation.password.value, userValidation.repeatedPassword.value]);
 
     const register = async () => {
-        try {
-            await userStore.register(firstName, lastName, email, password);
+        const result = await userStore.register(userValidation.firstName.value, userValidation.lastName.value, userValidation.email.value, userValidation.password.value);
+        if (result) {
             history.push('/login/successful');
-        } catch (error) {
-            console.error(error);
         }
     };
 
@@ -38,8 +65,8 @@ const Registration: React.FC = () => {
                     minLength={2}
                     maxLength={32}
                     title="Length: 2 - 32 characters."
-                    value={firstName}
-                    onChange={(event) => setFirstName(event.target.value)}
+                    value={userValidation.firstName.value}
+                    onChange={(validation) => setUserValidation({ ...userValidation, firstName: validation })}
                 />
                 <Input
                     label="Last Name"
@@ -49,16 +76,16 @@ const Registration: React.FC = () => {
                     minLength={2}
                     maxLength={32}
                     title="Length: 2 - 32 characters."
-                    value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
+                    value={userValidation.lastName.value}
+                    onChange={(validation) => setUserValidation({ ...userValidation, lastName: validation })}
                 />
                 <Input
                     label="E-Mail"
                     id="mail"
                     type="email"
                     pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    value={userValidation.email.value}
+                    onChange={(validation) => setUserValidation({ ...userValidation, email: validation })}
                 />
                 <Input
                     label="Password"
@@ -68,8 +95,8 @@ const Registration: React.FC = () => {
                     title="Length: 8 - 20. Use at least one lowercase character, one uppercase character and one number."
                     minLength={8}
                     maxLength={20}
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    value={userValidation.password.value}
+                    onChange={(validation) => setUserValidation({ ...userValidation, password: validation })}
                 />
                 <Input
                     label="Repeat Password"
@@ -79,16 +106,13 @@ const Registration: React.FC = () => {
                     title="Has to match the aforementioned password."
                     minLength={8}
                     maxLength={20}
-                    value={repeatedPassword}
-                    onChange={(event) => setRepeatedPassword(event.target.value)}
+                    value={userValidation.repeatedPassword.value}
+                    onChange={(validation) => setUserValidation({ ...userValidation, repeatedPassword: validation })}
                 />
                 <>
-                    {repeatedPassword.length > 0 && repeatedPassword !== password && (
-                        <p>Passwords do not match!</p>
-                    )}
                     {userStore.currentErrorOccurred && <p>An error occurred! Please try again later!</p>}
                     <div className="submit">
-                        <Button type="submit" ariaLabel="Register" onClick={() => register()}>
+                        <Button type="submit" ariaLabel="Register" onClick={() => register()} disabled={!formValid}>
                             <span>Register</span>
                         </Button>
                     </div>

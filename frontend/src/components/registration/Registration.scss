@@ -1,23 +1,18 @@
 @import '../../utilities/variables';
+@import '../../utilities/mixins';
 
 .registration {
     grid-column-start: 2;
     grid-column-end: 2;
 
-    h2 {
-        text-align: center;
-    }
-
-    hr {
-        box-shadow: 0 2px 4px $accent1Light;
-    }
+    @include heading;
 
     p {
         grid-row-start: 1;
         grid-row-end: 1;
         grid-column-start: 2;
         grid-column-end: 2;
-        color: $accent2;
+        color: $gray-200;
         font-size: 1.5rem;
         text-align: center;
     }

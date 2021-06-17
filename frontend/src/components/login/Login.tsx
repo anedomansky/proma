@@ -36,7 +36,7 @@ const Login: React.FC = () => {
                     type="email"
                     pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    onChange={(event) => null}
                 />
                 <Input
                     label="Password"
@@ -47,7 +47,7 @@ const Login: React.FC = () => {
                     minLength={8}
                     maxLength={20}
                     value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={(event) => null}
                 />
                 <div className="submit">
                     <Button type="submit" ariaLabel="Sign in" onClick={() => login()}>

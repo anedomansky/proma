@@ -34,6 +34,7 @@ class UserService {
     }
 
     public static async register(firstName: string, lastName: string, email: string, password: string): Promise<User> {
+        console.log('User:', firstName, lastName, email, password);
         const response = await fetch('http://localhost:4001/users/register', {
             method: 'POST',
             headers: {
@@ -51,8 +52,7 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const newUser: User = await response.json();
-        return newUser;
+        return response.json();
     }
 
     public static async login(email: string, password: string): Promise<LoginResponse> {

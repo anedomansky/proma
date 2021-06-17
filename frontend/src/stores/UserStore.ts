@@ -115,14 +115,16 @@ class UserStore {
         }
     }
 
-    public async register(firstName: string, lastName: string, email: string, password: string): Promise<void> {
+    public async register(firstName: string, lastName: string, email: string, password: string): Promise<boolean> {
         try {
             this.setUpdatingData(true);
             this.setErrorOccurred(false);
-            await UserService.register(firstName, lastName, email, password);
+            const user = await UserService.register(firstName, lastName, email, password);
+            return !!user;
         } catch (error) {
             console.error(error);
             this.setErrorOccurred(true);
+            return false;
         } finally {
             this.setUpdatingData(false);
         }
