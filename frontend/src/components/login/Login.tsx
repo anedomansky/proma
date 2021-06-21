@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import useStores from '../../hooks/useStores';
+import { LoginValidation } from '../../interfaces/LoginValidation';
 import Button from '../button/Button';
 import Form from '../form/Form';
 import Input from '../input/Input';
@@ -15,12 +16,27 @@ const Login: React.FC = () => {
     const { userStore } = useStores();
     const { registered } = useParams<Params>();
     const history = useHistory();
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [formValid, setFormValid] = useState<boolean>(false);
+    const [userLogin, setUserLogin] = useState<LoginValidation>({
+        email: {
+            value: '',
+            valid: false,
+        },
+        password: {
+            value: '',
+            valid: false,
+        },
+    });
+
+    useEffect(() => {
+        setFormValid(userLogin.email.valid && userLogin.password.valid);
+    }, [userLogin.email.valid, userLogin.password.valid]);
 
     const login = async () => {
-        await userStore.login(email, password);
-        history.push('/');
+        const result = await userStore.login(userLogin.email.value, userLogin.password.value);
+        if (result) {
+            history.push('/');
+        }
     };
 
     return (
@@ -35,8 +51,8 @@ const Login: React.FC = () => {
                     id="mail"
                     type="email"
                     pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                    value={email}
-                    onChange={(event) => null}
+                    value={userLogin.email.value}
+                    onChange={(validation) => setUserLogin({ ...userLogin, email: { value: validation.value.toLowerCase(), valid: validation.valid } })}
                 />
                 <Input
                     label="Password"
@@ -46,11 +62,11 @@ const Login: React.FC = () => {
                     title="Length: 8 - 20. Use at least one lowercase character, one uppercase character and one number."
                     minLength={8}
                     maxLength={20}
-                    value={password}
-                    onChange={(event) => null}
+                    value={userLogin.password.value}
+                    onChange={(validation) => setUserLogin({ ...userLogin, password: validation })}
                 />
                 <div className="submit">
-                    <Button type="submit" ariaLabel="Sign in" onClick={() => login()}>
+                    <Button type="submit" ariaLabel="Sign in" onClick={() => login()} disabled={!formValid}>
                         <span>Sign In</span>
                     </Button>
                     <Link to="/register" className="register">Not a user yet?</Link>

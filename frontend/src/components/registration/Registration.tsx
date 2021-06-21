@@ -52,6 +52,13 @@ const Registration: React.FC = () => {
         }
     };
 
+    const capitalizeName = (name: string) => {
+        if (name) {
+            return `${name[0].toUpperCase()}${name.slice(1).toLowerCase()}`;
+        }
+        return name;
+    };
+
     return (
         <section className="registration">
             <h2>Registration</h2>
@@ -66,7 +73,7 @@ const Registration: React.FC = () => {
                     maxLength={32}
                     title="Length: 2 - 32 characters."
                     value={userValidation.firstName.value}
-                    onChange={(validation) => setUserValidation({ ...userValidation, firstName: validation })}
+                    onChange={(validation) => setUserValidation({ ...userValidation, firstName: { value: capitalizeName(validation.value), valid: validation.valid } })}
                 />
                 <Input
                     label="Last Name"
@@ -77,7 +84,7 @@ const Registration: React.FC = () => {
                     maxLength={32}
                     title="Length: 2 - 32 characters."
                     value={userValidation.lastName.value}
-                    onChange={(validation) => setUserValidation({ ...userValidation, lastName: validation })}
+                    onChange={(validation) => setUserValidation({ ...userValidation, lastName: { value: capitalizeName(validation.value), valid: validation.valid } })}
                 />
                 <Input
                     label="E-Mail"
@@ -85,7 +92,7 @@ const Registration: React.FC = () => {
                     type="email"
                     pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     value={userValidation.email.value}
-                    onChange={(validation) => setUserValidation({ ...userValidation, email: validation })}
+                    onChange={(validation) => setUserValidation({ ...userValidation, email: { value: validation.value.toLowerCase(), valid: validation.valid } })}
                 />
                 <Input
                     label="Password"

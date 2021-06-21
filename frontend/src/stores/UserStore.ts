@@ -130,7 +130,7 @@ class UserStore {
         }
     }
 
-    public async login(email: string, password: string): Promise<void> {
+    public async login(email: string, password: string): Promise<boolean> {
         try {
             this.setUpdatingData(true);
             this.setErrorOccurred(false);
@@ -141,9 +141,11 @@ class UserStore {
                 window.localStorage.setItem('token', this.token as string);
                 window.localStorage.setItem('user', JSON.stringify(this.user));
             }
+            return !!loginResponse.user && !!loginResponse.token;
         } catch (error) {
             console.error(error);
             this.setErrorOccurred(true);
+            return false;
         } finally {
             this.setUpdatingData(false);
         }

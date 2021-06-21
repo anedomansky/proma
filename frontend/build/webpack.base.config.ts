@@ -39,7 +39,7 @@ const baseConfig: webpack.Configuration = {
             inject: true,
             title: 'Proma',
             template: path.resolve(__dirname, '../src/index.html'),
-            // favicon: path.resolve(__dirname, '../src/assets/icons/favicon.ico'),
+            favicon: path.resolve(__dirname, '../src/assets/icons/favicon.png'),
         }),
         new FriendlyErrorsWebpackPlugin(),
         new ForkTsCheckerWebpackPlugin({

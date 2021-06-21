@@ -79,8 +79,7 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const success: LoginResponse = await response.json();
-        return success;
+        return response.json();
     }
 
     public static async verifyUser(user: User, token: string): Promise<boolean> {

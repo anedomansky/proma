@@ -19,10 +19,10 @@
     .submit {
         grid-row-start: 3;
         grid-row-end: 3;
-        grid-column-start: 1;
-        grid-column-end: 4;
+        grid-column-start: 2;
+        grid-column-end: 2;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
 
