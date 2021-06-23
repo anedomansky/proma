@@ -6,20 +6,28 @@ ul {
     bottom: -2rem;
     margin: 0;
     padding: 0;
-    background-color: $primary2;
-    color: $accent1;
+    background-color: $gray-500;
 
     li {
         list-style: none;
         padding: 0.25rem 0.5rem;
-        border: 1px solid $accent1;
+        border: 2px solid $gray-100;
 
         &:hover {
-            background-color: $brown-500;
+            border: 2px solid $blue-300;
+            background-color: $blue-300;
         }
         
         & > * {
             font-size: $bodyFont;
+        }
+
+        button {
+            color: $gray-200;
+
+            &:hover {
+                color: $blue-500;
+            }
         }
     }
 }

@@ -43,7 +43,7 @@ const Registration: React.FC = () => {
             && userValidation.password.valid
             && (userValidation.password.value === userValidation.repeatedPassword.value),
         );
-    }, [formValid, userValidation.email.valid, userValidation.firstName, userValidation.lastName.valid, userValidation.password.valid, userValidation.password.value, userValidation.repeatedPassword.value]);
+    }, [userValidation.email.valid, userValidation.firstName, userValidation.lastName.valid, userValidation.password.valid, userValidation.password.value, userValidation.repeatedPassword.value]);
 
     const register = async () => {
         const result = await userStore.register(userValidation.firstName.value, userValidation.lastName.value, userValidation.email.value, userValidation.password.value);

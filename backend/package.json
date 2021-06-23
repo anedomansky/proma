@@ -5,9 +5,10 @@
   "main": "dist/index.js",
   "private": true,
   "scripts": {
-    "compile": "tsc --skipLibCheck && node dist/index.js",
-    "start:dev": "nodemon -e ts --exec \"npm run compile\"",
-    "start": "tsc && node .",
+    "prebuild": "eslint src/**/*.ts",
+    "build": "tsc",
+    "compile": "tsc && node dist/index.js",
+    "start": "nodemon -e ts --exec \"npm run compile\"",
     "lint": "eslint src/**/*.ts"
   },
   "keywords": [],

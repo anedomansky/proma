@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import useCurrentWidth from '../../hooks/useCurrentWidth';
 import Button from '../button/Button';
 import './Sidebar.scss';
-import arrowRightIcon from '../../assets/icons/arrow-right.svg';
-import crossIcon from '../../assets/icons/cross.svg';
+import arrowIcon from '../../assets/icons/arrow-alt.svg';
+import crossIcon from '../../assets/icons/cross-alt.svg';
 
 const Sidebar: React.FC = () => {
     const location = useLocation();
@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
                     </>
                 ) : (
                     <Button type="button" onClick={() => setShowContent(true)}>
-                        <img src={arrowRightIcon} alt="Expand menu" />
+                        <img src={arrowIcon} alt="Expand menu" />
                     </Button>
                 )
             }
