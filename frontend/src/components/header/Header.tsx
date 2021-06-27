@@ -10,6 +10,24 @@ import List from '../list/List';
 import Modal from '../modal/Modal';
 import './Header.scss';
 
+interface TitleProps {
+    isAdmin: boolean;
+}
+
+const Title: React.FC<TitleProps> = ({ isAdmin }) => {
+    if (isAdmin) {
+        return (
+            <h1 className="title">
+                Fancy IT Company Name
+                <Button type="button" onClick={() => null}>
+                    <img src={plusIcon} alt="Add project" />
+                </Button>
+            </h1>
+        );
+    }
+    return <h1 className="title">Fancy IT Company Name</h1>;
+};
+
 const Header: React.FC = () => {
     const { userStore } = useStores();
     const location = useLocation();
@@ -29,7 +47,7 @@ const Header: React.FC = () => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [ref.current]);
+    }, []);
 
     const logout = () => {
         userStore.logout();
@@ -38,24 +56,10 @@ const Header: React.FC = () => {
         history.push('/login');
     };
 
-    const renderTitle = () => {
-        if (userStore.isAdmin) {
-            return (
-                <h1 className="title">
-                    Fancy IT Company Name
-                    <Button type="button" onClick={() => null}>
-                        <img src={plusIcon} alt="Add project" />
-                    </Button>
-                </h1>
-            );
-        }
-        return <h1 className="title">Fancy IT Company Name</h1>;
-    };
-
     return (
         <header>
             <Link to="/" className="logo"><img className="logo__img" src={logoImg} alt="Logo" /></Link>
-            {renderTitle()}
+            <Title isAdmin={userStore.isAdmin} />
             <div className="user" ref={ref}>
                 {!(location.pathname === '/register' || location.pathname.startsWith('/login')) && (
                     <>

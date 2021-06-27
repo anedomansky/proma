@@ -1,13 +1,6 @@
 @import './variables';
 
-@mixin heading {
-    h2 {
-        text-align: center;
-        color: $gray-100;
-    }
-    
-    hr {
-        box-shadow: 0 2px 4px $accent1Light;
-        color: $gray-100;
-    }
+@mixin page {
+    display: grid;
+    grid-template-columns: 1fr minmax(302px, 2fr) 1fr;
 }

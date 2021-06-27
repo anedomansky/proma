@@ -1,0 +1,11 @@
+@import '../../utilities/variables';
+
+h2 {
+    text-align: center;
+    color: $grey-100;
+}
+
+hr {
+    box-shadow: 0 2px 4px $accent1Light;
+    color: $grey-100;
+}

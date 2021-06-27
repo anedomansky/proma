@@ -1,11 +1,8 @@
 @import '../../utilities/variables';
-@import '../../utilities/mixins';
 
 .login {
     grid-column-start: 2;
     grid-column-end: 2;
-
-    @include heading;
 
     h3 {
         text-align: center;
@@ -13,7 +10,7 @@
     }
 
     .login-fail {
-        color: $gray-200;
+        color: $grey-200;
     }
 
     .submit {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Form from '../form/Form';
+import Heading from '../heading/Heading';
 import Input from '../input/Input';
 import './ProjectTaskSearch.scss';
 
@@ -17,8 +18,7 @@ const ProjectTaskSearch: React.FC = () => {
 
     return (
         <section className="project-task-search">
-            <h2>Search</h2>
-            <hr />
+            <Heading title="Search" />
             <Form>
                 <>
                     <Input

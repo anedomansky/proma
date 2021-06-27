@@ -15,8 +15,7 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const users: User[] = await response.json();
-        return users;
+        return response.json();
     }
 
     public static async getByEmail(email: string): Promise<User | null> {
@@ -29,8 +28,7 @@ class UserService {
             const error: ErrorResponse = await response.json();
             throw new Error(error.message);
         }
-        const user: User = await response.json();
-        return user;
+        return response.json();
     }
 
     public static async register(firstName: string, lastName: string, email: string, password: string): Promise<User> {
@@ -89,7 +87,7 @@ class UserService {
                 'Content-Type': 'application/json',
                 token,
             },
-            body: JSON.stringify(user as User),
+            body: JSON.stringify(user),
         });
         const { status } = response;
         if (status === 200) {

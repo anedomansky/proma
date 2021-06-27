@@ -5,6 +5,7 @@ import useStores from '../../hooks/useStores';
 import { RegistrationValidation } from '../../interfaces/RegistrationValidation';
 import Button from '../button/Button';
 import Form from '../form/Form';
+import Heading from '../heading/Heading';
 import Input from '../input/Input';
 import './Registration.scss';
 
@@ -61,8 +62,7 @@ const Registration: React.FC = () => {
 
     return (
         <section className="registration">
-            <h2>Registration</h2>
-            <hr />
+            <Heading title="Registration" />
             <Form>
                 <Input
                     label="First Name"

@@ -6,12 +6,12 @@ ul {
     bottom: -2rem;
     margin: 0;
     padding: 0;
-    background-color: $gray-500;
+    background-color: $grey-500;
 
     li {
         list-style: none;
         padding: 0.25rem 0.5rem;
-        border: 2px solid $gray-100;
+        border: 2px solid $grey-100;
 
         &:hover {
             border: 2px solid $blue-300;
@@ -23,7 +23,7 @@ ul {
         }
 
         button {
-            color: $gray-200;
+            color: $grey-200;
 
             &:hover {
                 color: $blue-500;

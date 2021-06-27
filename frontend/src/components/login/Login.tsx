@@ -5,6 +5,7 @@ import useStores from '../../hooks/useStores';
 import { LoginValidation } from '../../interfaces/LoginValidation';
 import Button from '../button/Button';
 import Form from '../form/Form';
+import Heading from '../heading/Heading';
 import Input from '../input/Input';
 import './Login.scss';
 
@@ -41,8 +42,7 @@ const Login: React.FC = () => {
 
     return (
         <section className="login">
-            <h2>Sign In</h2>
-            <hr />
+            <Heading title="Login" />
             {registered && <h3>Registration successful! Please proceed with the login now.</h3>}
             {userStore.currentErrorOccurred && <h3 className="login-fail">Login failed! Wrong credentials!</h3>}
             <Form>
