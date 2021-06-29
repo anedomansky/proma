@@ -66,7 +66,7 @@ const Login: React.FC = () => {
                     onChange={(validation) => setUserLogin({ ...userLogin, password: validation })}
                 />
                 <div className="submit">
-                    <Button type="submit" ariaLabel="Sign in" onClick={() => login()} disabled={!formValid}>
+                    <Button btnType="primary" type="submit" ariaLabel="Sign in" onClick={() => login()} disabled={!formValid}>
                         <span>Sign In</span>
                     </Button>
                     <Link to="/register" className="register">Not a user yet?</Link>

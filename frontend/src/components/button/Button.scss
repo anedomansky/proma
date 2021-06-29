@@ -1,6 +1,8 @@
 @import '../../utilities/variables';
 
 button {
+    border: none;
+    background: none;
     cursor: pointer;
     display: flex;
     justify-content: space-evenly;
@@ -12,10 +14,10 @@ button {
     }
 }
 
-.submit-btn {
+.primary {
     border: 1px solid $blue-500;
     background-color: $blue-500;
-    font-size: 1.5rem;
+    font-size: $fontSize;
     padding: 0.5rem 2rem 0.5rem 2rem;
     color: $blue-300;
 
@@ -26,7 +28,9 @@ button {
     }
 }
 
-.button-btn {
-    border: none;
-    background: none;
+.secondary {
+    border: 2px solid $blue-300;
+    color: $blue-300;
+    font-size: $fontSize;
+    padding: 0.5rem 2rem 0.5rem 2rem;
 }

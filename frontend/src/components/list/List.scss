@@ -7,11 +7,11 @@ ul {
     margin: 0;
     padding: 0;
     background-color: $grey-500;
+    box-shadow: 0 4px 8px 0 $accent1Light,0 6px 20px 0 $accent1Light;
 
     li {
         list-style: none;
         padding: 0.25rem 0.5rem;
-        border: 2px solid $grey-100;
 
         &:hover {
             border: 2px solid $blue-300;

@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Button from '../button/Button';
 import './Modal.scss';
-import crossIcon from '../../assets/icons/cross.svg';
-import checkmarkIcon from '../../assets/icons/checkmark.svg';
+import crossIcon from '../../assets/icons/cross-close.svg';
 
 interface Props {
     confirm: () => void;
@@ -39,12 +38,10 @@ const Modal: React.FC<Props> = ({ confirm, cancel, text, show }) => {
                     <p>{text}</p>
                 </div>
                 <div className="modal__footer">
-                    <Button type="button" onClick={() => cancel()}>
-                        <img src={crossIcon} alt="No" />
+                    <Button btnType="secondary" type="button" onClick={() => cancel()}>
                         <span>No</span>
                     </Button>
-                    <Button type="button" onClick={() => confirm()}>
-                        <img src={checkmarkIcon} alt="Yes" />
+                    <Button btnType="primary" type="button" onClick={() => confirm()}>
                         <span>Yes</span>
                     </Button>
                 </div>

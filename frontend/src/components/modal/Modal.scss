@@ -14,8 +14,8 @@
     .modal__content {
         position: relative;
         margin: auto;
-        width: 70%;
-        background-color: $primary2;
+        width: 50%;
+        background-color: $grey-500;;
         box-shadow: 0 4px 8px 0 $accent1Light,0 6px 20px 0 $accent1Light;
 
         .modal__header {
@@ -31,8 +31,9 @@
 
         .modal__body {
             p {
+                font-size: $fontSize;
                 text-align: center;
-                color: $accent1;
+                color: $grey-100;
             }
         }
 
@@ -40,23 +41,6 @@
             display: flex;
             justify-content: space-evenly;
             padding: 1rem;
-
-            button {
-                border: 1px solid $accent1;
-
-                &:hover {
-                    background-color: $brown-500;
-                }
-            }
-
-            img {
-                width: 2rem;
-                height: auto;
-            }
-
-            span {
-                font-size: $bodyFont;
-            }
         }
     }
 }

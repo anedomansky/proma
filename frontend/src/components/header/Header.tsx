@@ -69,7 +69,7 @@ const Header: React.FC = () => {
                         {
                             show && (
                                 <List>
-                                    <Button type="button" onClick={() => setShowModal(true)}>
+                                    <Button type="button" onClick={() => { setShowModal(true); setShow(false); }}>
                                         Logout
                                     </Button>
                                 </List>

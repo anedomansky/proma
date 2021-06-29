@@ -119,7 +119,7 @@ const Registration: React.FC = () => {
                 <>
                     {userStore.currentErrorOccurred && <p>An error occurred! Please try again later!</p>}
                     <div className="submit">
-                        <Button type="submit" ariaLabel="Register" onClick={() => register()} disabled={!formValid}>
+                        <Button btnType="primary" type="submit" ariaLabel="Register" onClick={() => register()} disabled={!formValid}>
                             <span>Register</span>
                         </Button>
                     </div>
