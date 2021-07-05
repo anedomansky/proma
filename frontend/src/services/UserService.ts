@@ -32,7 +32,6 @@ class UserService {
     }
 
     public static async register(firstName: string, lastName: string, email: string, password: string): Promise<User> {
-        console.log('User:', firstName, lastName, email, password);
         const response = await fetch('http://localhost:4001/users/register', {
             method: 'POST',
             headers: {
@@ -65,13 +64,9 @@ class UserService {
             } as LoginRequest),
         });
         const { status } = response;
-        if (status === 404) {
-            const noUser: LoginResponse = await response.json();
-            throw Error(noUser.message);
-        }
-        if (status === 403) {
-            const wrongCredentials: LoginResponse = await response.json();
-            throw Error(wrongCredentials.message);
+        if (status === 404 || status === 403) {
+            const credentialsError: LoginResponse = await response.json();
+            throw Error(credentialsError.message);
         }
         if (status === 500) {
             const error: ErrorResponse = await response.json();
