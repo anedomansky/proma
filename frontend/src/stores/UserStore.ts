@@ -27,6 +27,7 @@ class UserStore {
             currentErrorOccurred: computed,
             currentUsers: computed,
             currentUser: computed,
+            currentToken: computed,
             getAll: action,
             getByEmail: action,
             register: action,
@@ -60,7 +61,11 @@ class UserStore {
         return this.user;
     }
 
-    public get isAdmin(): boolean {
+    public get currentToken(): string | null {
+        return this.token;
+    }
+
+    public isAdmin(): boolean {
         if (this.user) {
             return this.user.isAdmin;
         }

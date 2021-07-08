@@ -59,7 +59,7 @@ const Header: React.FC = () => {
     return (
         <header>
             <Link to="/" className="logo"><img className="logo__img" src={logoImg} alt="Logo" /></Link>
-            <Title isAdmin={userStore.isAdmin} />
+            <Title isAdmin={userStore.isAdmin()} />
             <div className="user" ref={ref}>
                 {!(location.pathname === '/register' || location.pathname.startsWith('/login')) && (
                     <>
