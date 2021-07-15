@@ -1,4 +1,5 @@
 @import '../../utilities/variables';
+@import '../../utilities/mixins';
 
 .login {
     grid-column-start: 2;
@@ -13,34 +14,11 @@
         color: $grey-200;
     }
 
-    .submit {
-        grid-row-start: 3;
-        grid-row-end: 3;
-        grid-column-start: 2;
-        grid-column-end: 2;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-
-        .register {
-            font-size: $fontSize;
-            color: $blue-300;
-        }
-    }
+    @include form-link;
 }
 
 @media (min-width: 1280px) {
-    .submit {
-        grid-column-start: 2;
-        grid-column-end: 2;
-
-        .register {
-            text-decoration: none;
-    
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+    .login {
+        @include form-link-desktop;
     }
 }

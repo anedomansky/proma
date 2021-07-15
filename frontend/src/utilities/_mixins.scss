@@ -2,5 +2,41 @@
 
 @mixin page {
     display: grid;
-    grid-template-columns: 1fr minmax(302px, 2fr) 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+@mixin form-link {
+    .submit {
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        display: grid;
+        place-items: center;
+        grid-row-gap: 1rem;
+
+        .form-link {
+            font-size: $fontSize;
+            color: $blue-300;
+        }
+    }
+}
+
+@mixin form-link-desktop {
+    .submit {
+        grid-column-start: 2;
+        grid-column-end: 2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .form-link {
+            text-decoration: none;
+    
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }

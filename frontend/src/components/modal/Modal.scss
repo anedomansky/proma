@@ -14,7 +14,7 @@
     .modal__content {
         position: relative;
         margin: auto;
-        width: 50%;
+        width: 90%;
         background-color: $grey-500;;
         box-shadow: 0 4px 8px 0 $accent1Light,0 6px 20px 0 $accent1Light;
 
@@ -47,4 +47,12 @@
 
 .show {
     display: block;
+}
+
+@media (min-width: 1280px) {
+    .modal {
+        .modal__content {
+            width: 50%;
+        }
+    }
 }

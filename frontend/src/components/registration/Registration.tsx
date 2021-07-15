@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useStores from '../../hooks/useStores';
 import { RegistrationValidation } from '../../interfaces/RegistrationValidation';
 import Button from '../button/Button';
@@ -122,6 +122,7 @@ const Registration: React.FC = () => {
                         <Button btnType="primary" type="submit" ariaLabel="Register" onClick={() => register()} disabled={!formValid}>
                             <span>Register</span>
                         </Button>
+                        <Link to="/login" className="form-link">Already an user?</Link>
                     </div>
                 </>
             </Form>

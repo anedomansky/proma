@@ -56,6 +56,7 @@ const Input: React.FC<Props> = ({ label, id, type, pattern, title, minLength, ma
                 onChange={inputChange}
                 required
             />
+            {!inputValid && value.length > 0 && <span className="hint">{title}</span>}
         </>
     );
 };

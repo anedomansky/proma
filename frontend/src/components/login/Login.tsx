@@ -42,7 +42,7 @@ const Login: React.FC = () => {
 
     return (
         <section className="login">
-            <Heading title="Login" />
+            <Heading title="Sign In" />
             {registered && <h3>Registration successful! Please proceed with the login now.</h3>}
             {userStore.currentErrorOccurred && <h3 className="login-fail">Login failed! Wrong credentials!</h3>}
             <Form>
@@ -69,7 +69,7 @@ const Login: React.FC = () => {
                     <Button btnType="primary" type="submit" ariaLabel="Sign in" onClick={() => login()} disabled={!formValid}>
                         <span>Sign In</span>
                     </Button>
-                    <Link to="/register" className="register">Not a user yet?</Link>
+                    <Link to="/register" className="form-link">Not an user yet?</Link>
                 </div>
             </Form>
         </section>
