@@ -19,9 +19,9 @@ const Title: React.FC<TitleProps> = ({ isAdmin }) => {
         return (
             <h1 className="title">
                 Fancy IT Company Name
-                <Button type="button" onClick={() => null}>
+                <Link to="/project/create">
                     <img src={plusIcon} alt="Add project" />
-                </Button>
+                </Link>
             </h1>
         );
     }

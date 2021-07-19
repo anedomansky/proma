@@ -3,9 +3,9 @@ import ProjectTaskSearch from '../project-task-search/ProjectTaskSearch';
 import './LandingPage.scss';
 
 const LandingPage: React.FC = () => (
-    <section className="landing-page">
+    <div className="landing-page">
         <ProjectTaskSearch />
-    </section>
+    </div>
 );
 
 export default LandingPage;

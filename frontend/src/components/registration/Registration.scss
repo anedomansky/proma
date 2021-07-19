@@ -5,13 +5,8 @@
     grid-column-start: 2;
     grid-column-end: 2;
 
-    p {
-        grid-row-start: 1;
-        grid-row-end: 1;
-        grid-column-start: 2;
-        grid-column-end: 2;
+    .registration__fail {
         color: $grey-200;
-        font-size: $fontSize;
         text-align: center;
     }
 

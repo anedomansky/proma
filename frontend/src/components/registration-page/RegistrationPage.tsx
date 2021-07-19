@@ -3,9 +3,9 @@ import Registration from '../registration/Registration';
 import './RegistrationPage.scss';
 
 const RegistrationPage: React.FC = () => (
-    <section className="registration-page">
+    <div className="registration-page">
         <Registration />
-    </section>
+    </div>
 );
 
 export default RegistrationPage;

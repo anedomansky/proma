@@ -37,6 +37,10 @@ const Registration: React.FC = () => {
     });
 
     useEffect(() => {
+        userStore.setErrorOccurred(false);
+    }, []);
+
+    useEffect(() => {
         setFormValid(
             userValidation.firstName.valid
             && userValidation.lastName.valid
@@ -63,6 +67,7 @@ const Registration: React.FC = () => {
     return (
         <section className="registration">
             <Heading title="Registration" />
+            {userStore.currentErrorOccurred && <h3 className="registration__fail">An error occurred! Please try again later!</h3>}
             <Form>
                 <Input
                     label="First Name"
@@ -116,15 +121,12 @@ const Registration: React.FC = () => {
                     value={userValidation.repeatedPassword.value}
                     onChange={(validation) => setUserValidation({ ...userValidation, repeatedPassword: validation })}
                 />
-                <>
-                    {userStore.currentErrorOccurred && <p>An error occurred! Please try again later!</p>}
-                    <div className="submit">
-                        <Button btnType="primary" type="submit" ariaLabel="Register" onClick={() => register()} disabled={!formValid}>
-                            <span>Register</span>
-                        </Button>
-                        <Link to="/login" className="form-link">Already an user?</Link>
-                    </div>
-                </>
+                <div className="submit">
+                    <Button btnType="primary" type="submit" ariaLabel="Register" onClick={() => register()} disabled={!formValid}>
+                        <span>Register</span>
+                    </Button>
+                    <Link to="/login" className="form-link">Already an user?</Link>
+                </div>
             </Form>
         </section>
     );

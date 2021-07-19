@@ -3,9 +3,9 @@ import Login from '../login/Login';
 import './LoginPage.scss';
 
 const LoginPage: React.FC = () => (
-    <section className="login-page">
+    <div className="login-page">
         <Login />
-    </section>
+    </div>
 );
 
 export default LoginPage;

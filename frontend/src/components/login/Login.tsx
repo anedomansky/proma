@@ -30,6 +30,10 @@ const Login: React.FC = () => {
     });
 
     useEffect(() => {
+        userStore.setErrorOccurred(false);
+    }, []);
+
+    useEffect(() => {
         setFormValid(userLogin.email.valid && userLogin.password.valid);
     }, [userLogin.email.valid, userLogin.password.valid]);
 
@@ -44,7 +48,7 @@ const Login: React.FC = () => {
         <section className="login">
             <Heading title="Sign In" />
             {registered && <h3>Registration successful! Please proceed with the login now.</h3>}
-            {userStore.currentErrorOccurred && <h3 className="login-fail">Login failed! Wrong credentials!</h3>}
+            {userStore.currentErrorOccurred && <h3 className="login__fail">Login failed! Wrong credentials!</h3>}
             <Form>
                 <Input
                     label="E-Mail"
