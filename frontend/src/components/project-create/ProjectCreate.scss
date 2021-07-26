@@ -1,21 +1,14 @@
-.project-create {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr;
-    
-    h2 {
-        grid-row-start: 1;
-        grid-row-end: 2;
-        grid-column-start: 1;
-        grid-column-end: 2;
-    }
+@import '../../utilities/mixins';
 
-    form {
-        grid-row-start: 2;
-    }
+.project-create {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    
+    @include form-link;
 }
 
 @media (min-width: 1280px) {
     .project-create {
+        @include form-link-desktop;
     }
 }

@@ -5,6 +5,7 @@ import Button from '../button/Button';
 import Form from '../form/Form';
 import Heading from '../heading/Heading';
 import Input from '../input/Input';
+import Users from '../users/Users';
 import './ProjectCreate.scss';
 
 const ProjectCreate: React.FC = () => {
@@ -16,7 +17,7 @@ const ProjectCreate: React.FC = () => {
                 <Button type="button" onClick={() => history.goBack()}>
                     <img src={backArrow} alt="Back" />
                 </Button>
-                Create a new project
+                <span>Create a new project</span>
             </Heading>
             <Form>
                 <Input
@@ -37,9 +38,19 @@ const ProjectCreate: React.FC = () => {
                     value=""
                     onChange={(validation) => null}
                 />
-                <span>USERS LIST</span>
+                <div>
+                    <Button btnType="secondary" type="button" onClick={() => null}>
+                        <span>Add</span>
+                    </Button>
+                </div>
+                <Users />
                 <div className="submit">
-                    SUBMIT
+                    <Button btnType="primary" type="submit" ariaLabel="Create" onClick={() => null} disabled={false}>
+                        <span>Create</span>
+                    </Button>
+                    <Button btnType="tertiary" type="button" onClick={() => history.goBack()}>
+                        <span>Cancel</span>
+                    </Button>
                 </div>
             </Form>
         </section>

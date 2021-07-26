@@ -6,7 +6,7 @@ interface Props {
     onClick: () => void;
     ariaLabel?: string;
     disabled?: boolean;
-    btnType?: 'primary' | 'secondary';
+    btnType?: 'primary' | 'secondary' | 'tertiary';
 }
 
 const Button: React.FC<Props> = ({ type, onClick, ariaLabel, disabled, btnType, children }) => (

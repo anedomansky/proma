@@ -28,9 +28,13 @@ button {
     }
 }
 
-.secondary {
+.secondary, .tertiary {
     border: 2px solid $blue-300;
     color: $blue-300;
     font-size: $fontSize;
     padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.tertiary {
+    border: none;
 }
