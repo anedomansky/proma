@@ -1,6 +1,6 @@
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto auto auto;
     grid-row-gap: 1rem;
     margin-bottom: 2rem;
@@ -8,19 +8,38 @@
     label, input {
         grid-row-start: 2;
         grid-row-end: 2;
-        grid-column-start: 2;
-        grid-column-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 5;
 
         & + span {
             grid-row-start: 3;
             grid-row-end: 3;
-            grid-column-start: 2;
-            grid-column-end: 2;
+            grid-column-start: 1;
+            grid-column-end: 5;
         }
     }
 
     label {
         grid-row-start: 1;
         grid-row-end: 1;
+    }
+}
+
+@media (min-width: 1280px) {
+    .form-row {
+        label, input {
+            grid-column-start: 2;
+            grid-column-end: 4;
+    
+            & + span {
+                grid-column-start: 2;
+                grid-column-end: 4;
+            }
+        }
+    
+        label {
+            grid-row-start: 1;
+            grid-row-end: 1;
+        }
     }
 }

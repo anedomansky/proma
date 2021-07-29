@@ -2,7 +2,7 @@ import React from 'react';
 import './Users.scss';
 
 const Users: React.FC = () => (
-    <div>
+    <div className="users">
         USERS
     </div>
 );

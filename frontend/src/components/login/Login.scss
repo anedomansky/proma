@@ -2,8 +2,8 @@
 @import '../../utilities/mixins';
 
 .login {
-    grid-column-start: 2;
-    grid-column-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
 
     h3 {
         text-align: center;
@@ -19,6 +19,8 @@
 
 @media (min-width: 1280px) {
     .login {
+        grid-column-start: 2;
+        grid-column-end: 2;
         @include form-link-desktop;
     }
 }

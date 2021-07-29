@@ -7,14 +7,15 @@ interface Props {
     ariaLabel?: string;
     disabled?: boolean;
     btnType?: 'primary' | 'secondary' | 'tertiary';
+    additionalClassnames?: string;
 }
 
-const Button: React.FC<Props> = ({ type, onClick, ariaLabel, disabled, btnType, children }) => (
+const Button: React.FC<Props> = ({ type, onClick, ariaLabel, disabled, btnType, additionalClassnames, children }) => (
     <button
         type={type}
         onClick={onClick}
         aria-label={ariaLabel}
-        className={btnType}
+        className={`${btnType} ${additionalClassnames}`}
         disabled={disabled}
     >
         {children}

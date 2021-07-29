@@ -1,14 +1,28 @@
 @import '../../utilities/mixins';
 
 .project-create {
-    grid-column-start: 2;
-    grid-column-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+
+    .back-btn {
+        margin-top: 1rem;
+    }
+
+    .add-btn {
+        grid-column-start: 1;
+    }
     
     @include form-link;
 }
 
 @media (min-width: 1280px) {
     .project-create {
+        grid-column-start: 2;
+        grid-column-end: 2;
         @include form-link-desktop;
+
+        .add-btn {
+            grid-column-start: 2;
+        }
     }
 }

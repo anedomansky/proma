@@ -13,12 +13,10 @@ const ProjectCreate: React.FC = () => {
 
     return (
         <section className="project-create">
-            <Heading>
-                <Button type="button" onClick={() => history.goBack()}>
-                    <img src={backArrow} alt="Back" />
-                </Button>
-                <span>Create a new project</span>
-            </Heading>
+            <Button type="button" onClick={() => history.goBack()} additionalClassnames="back-btn">
+                <img src={backArrow} alt="Back" />
+            </Button>
+            <Heading title="Create a new project" />
             <Form>
                 <Input
                     label="Name"
@@ -38,11 +36,9 @@ const ProjectCreate: React.FC = () => {
                     value=""
                     onChange={(validation) => null}
                 />
-                <div>
-                    <Button btnType="secondary" type="button" onClick={() => null}>
-                        <span>Add</span>
-                    </Button>
-                </div>
+                <Button btnType="secondary" type="button" onClick={() => null} additionalClassnames="add-btn">
+                    <span>Add</span>
+                </Button>
                 <Users />
                 <div className="submit">
                     <Button btnType="primary" type="submit" ariaLabel="Create" onClick={() => null} disabled={false}>

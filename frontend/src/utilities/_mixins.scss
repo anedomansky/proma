@@ -3,6 +3,7 @@
 @mixin page {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
+    margin: 0.5rem;
 }
 
 @mixin form-link {
@@ -10,7 +11,7 @@
         grid-row-start: 1;
         grid-row-end: 3;
         grid-column-start: 1;
-        grid-column-end: 4;
+        grid-column-end: 5;
         display: grid;
         place-items: center;
         grid-row-gap: 1rem;
@@ -25,7 +26,7 @@
 @mixin form-link-desktop {
     .submit {
         grid-column-start: 2;
-        grid-column-end: 2;
+        grid-column-end: 4;
         display: flex;
         justify-content: space-between;
         align-items: center;

@@ -1,4 +1,11 @@
 .project-task-search {
-    grid-column-start: 2;
-    grid-column-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+@media (min-width: 1280px) {
+    .project-task-search {
+        grid-column-start: 2;
+        grid-column-end: 2;
+    }
 }
