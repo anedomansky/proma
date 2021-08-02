@@ -8,8 +8,13 @@
         margin-top: 1rem;
     }
 
-    .add-btn {
+    .add-user {
+        grid-row-start: 1;
+        grid-row-end: 3;
         grid-column-start: 1;
+        grid-column-end: 5;
+        display: grid;
+        place-items: center;
     }
     
     @include form-link;
@@ -21,8 +26,10 @@
         grid-column-end: 2;
         @include form-link-desktop;
 
-        .add-btn {
+        .add-user {
             grid-column-start: 2;
+            grid-column-end: 4;
+            place-items: baseline;
         }
     }
 }

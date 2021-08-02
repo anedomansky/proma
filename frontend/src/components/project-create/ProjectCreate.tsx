@@ -36,9 +36,11 @@ const ProjectCreate: React.FC = () => {
                     value=""
                     onChange={(validation) => null}
                 />
-                <Button btnType="secondary" type="button" onClick={() => null} additionalClassnames="add-btn">
-                    <span>Add</span>
-                </Button>
+                <div className="add-user">
+                    <Button btnType="secondary" type="button" onClick={() => null}>
+                        <span>Add</span>
+                    </Button>
+                </div>
                 <Users />
                 <div className="submit">
                     <Button btnType="primary" type="submit" ariaLabel="Create" onClick={() => null} disabled={false}>

@@ -1,6 +1,24 @@
+@import '../../utilities/variables';
+
 .users {
     grid-column-start: 1;
     grid-column-end: 5;
+
+    &__list {
+        margin: 0;
+        padding: 0;
+
+        li {
+            font-size: $fontSize;
+            display: flex;
+            list-style: none;
+
+            img {
+                height: 2rem;
+                width: auto;
+            }
+        }
+    }
 }
 
 @media (min-width: 1280px) {
