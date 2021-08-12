@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node ./build/server.ts",
     "test": "jest --silent --collectCoverage",
-    "build": "webpack --config ./build/webpack.prod.config.ts"
+    "build": "NODE_ENV=production webpack --config ./build/webpack.prod.config.ts"
   },
   "repository": {
     "type": "git",

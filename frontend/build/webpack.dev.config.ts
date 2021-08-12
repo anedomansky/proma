@@ -7,7 +7,7 @@ import baseConfig from './webpack.base.config';
 const devConfig: webpack.Configuration = {
     devtool: 'eval-source-map',
     entry: {
-        app: ['webpack-hot-middleware/client', './src/index.tsx'],
+        app: ['webpack-hot-middleware/client', './src/index.dev.tsx'],
     },
     mode: 'development',
     optimization: {
