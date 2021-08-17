@@ -7,8 +7,8 @@
   "scripts": {
     "prebuild": "eslint src/**/*.ts",
     "build": "tsc",
-    "compile": "tsc && node dist/index.js",
-    "start": "nodemon -e ts --exec \"npm run compile\"",
+    "start": "tsc && node dist/index.js",
+    "start:dev": "nodemon -e ts --exec \"npm run start\"",
     "lint": "eslint src/**/*.ts"
   },
   "keywords": [],
